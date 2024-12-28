@@ -75,7 +75,7 @@ This project is licensed under the [GNU General Public License v3.0](LICENSE).
 ## Support
 
 If you encounter any issues or have questions:
-1. Check the [Issues](https://github.com/YourUsername/XMobGeneration/issues) page
+1. Check the [Issues](https://github.com/Akar1881/XMobGeneration/issues) page
 2. Create a new issue if your problem isn't already listed
 
 ## Credits
