@@ -1,0 +1,14 @@
+name: XMobGeneration
+version: 1.0
+main: com.xmobgeneration.XMobGeneration
+api-version: 1.17
+depend: [WorldEdit]
+commands:
+  xmg:
+    description: Main command for XMobGeneration plugin
+    usage: /<command> [subcommand] [args]
+    aliases: [xmobgen]
+permissions:
+  xmg.admin:
+    description: Allows access to all XMobGeneration commands
+    default: op
