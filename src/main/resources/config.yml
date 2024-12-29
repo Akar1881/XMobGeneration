@@ -2,6 +2,8 @@ settings:
   default-mob-type: ZOMBIE
   default-spawn-count: 5
   default-respawn-delay: 30
+  # Restart interval in minutes (must be greater than 1)
+  restart-interval: 2
 
 messages:
   prefix: "&8[&bXMobGeneration&8] &7"
@@ -22,3 +24,4 @@ messages:
   max-areas-reached: "&cMaximum number of areas (45) has been reached!"
   restart-warning: "&e&lAll mob areas will be reset in %minutes% minute(s)!"
   restart-complete: "&a&lAll mob areas have been successfully reset!"
+  invalid-restart-interval: "&cRestart interval must be greater than 1 minute! Using default value of 10 minutes."
