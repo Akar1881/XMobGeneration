@@ -1,4 +1,6 @@
 com\xmobgeneration\commands\CommandManager.class
+com\xmobgeneration\listeners\MobContainmentListener$1.class
+com\xmobgeneration\listeners\MobContainmentListener.class
 com\xmobgeneration\commands\SubCommand.class
 com\xmobgeneration\gui\menus\CustomDropsMenu.class
 com\xmobgeneration\commands\subcommands\CreateAreaCommand.class

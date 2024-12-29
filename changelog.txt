@@ -1,5 +1,28 @@
 # XMobGeneration Changelog
 
+## Version 1.3.0 (2024-12-29)
+
+### Fixed
+- Spawn Count System
+  - Fixed issue where more mobs would spawn than configured
+  - Added accurate mob counting per area
+  - Improved initial spawn logic to respect configured limits
+- Respawn System
+  - Fixed issue where all mobs would respawn when one dies
+  - Implemented individual mob respawn tracking
+  - Each mob now respawns independently after its configured delay
+- Mob Containment System
+  - Added system to prevent mobs from leaving their designated areas
+  - Automatic teleportation of mobs back to safe locations
+  - Prevention of player interactions that could move mobs out of areas
+
+### Technical Changes
+- Added RespawnTask for handling individual mob respawns
+- Enhanced MobTracker with better mob counting and tracking
+- Improved spawn location validation
+- Added containment checks and teleport handling
+- Optimized mob cleanup and management
+
 ## Version 1.2.0 (2024-12-29)
 
 ### Added

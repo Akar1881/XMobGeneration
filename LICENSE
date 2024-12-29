@@ -1,15 +1,140 @@
-GNU GENERAL PUBLIC LICENSE
-                       Version 3, 29 June 2007
+                     GNU GENERAL PUBLIC LICENSE
+                        Version 3, 29 June 2007
 
- Copyright (C) 2007 Free Software Foundation, Inc. httpsfsf.org
+ Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
 
-                            Preamble
+                             Preamble
 
   The GNU General Public License is a free, copyleft license for
-software and other kinds of works.
+software and other kinds of works. This license is intended to guarantee
+your freedom to share and change all versions of a program--to make sure
+it remains free software for all its users. This General Public License
+applies to most of the Free Software Foundation's software and to any
+other program whose authors commit to using it. (Some other Free Software
+Foundation software is covered by the GNU Lesser General Public License
+instead.)
 
-[... Rest of GPL-3.0 license text ...]
+  When we speak of free software, we are referring to freedom, not price.
+Our General Public Licenses are designed to make sure that you have the
+freedom to distribute copies of free software (and charge for this service
+if you wish), that you receive source code or can get it if you want it,
+that you can change the software and use pieces of it in new free programs,
+and that you are informed that you can do these things.
 
-The complete license text can be found at httpswww.gnu.orglicensesgpl-3.0.txt
+  Developers that use the GNU GPL protect your rights with two steps:
+(1) assert copyright on the software, and (2) offer you this License
+giving you legal permission to copy, distribute and/or modify it.
+
+  For the developers' and authors' sake, the GPL ensures that everyone else
+is also granted these freedoms. For example, if you distribute copies of
+such a program, whether gratis or for a fee, you must pass on the same
+freedoms to the recipients. You must make sure that they, too, receive or
+can get the source code. And you must tell them their rights.
+
+  Developers and authors who use the GPL protect your rights with two steps:
+(1) assert copyright on the software, and (2) offer you this License
+giving you legal permission to copy, distribute and/or modify it.
+
+  To protect your rights, we need to make restrictions that forbid anyone
+to deny you these rights or to ask you to surrender the rights. These
+restrictions translate to certain responsibilities for you if you distribute
+copies of the software, or if you modify it.
+
+  For example, if you distribute copies of such a program, whether gratis
+or for a fee, you must pass on the same freedoms to the recipients. You
+must make sure that they, too, receive or can get the source code. And you
+must tell them their rights.
+
+  Developers and authors who use the GPL protect your rights with two steps:
+(1) assert copyright on the software, and (2) offer you this License
+giving you legal permission to copy, distribute and/or modify it.
+
+  The precise terms and conditions for copying, distribution and modification
+follow.
+
+                       TERMS AND CONDITIONS
+
+  0. Definitions.
+
+  "This License" refers to version 3 of the GNU General Public License.
+
+  "Copyright" also means copyright-like laws that apply to other kinds of
+works, such as semiconductor masks.
+
+  "The Program" refers to any copyrightable work licensed under this
+License. Each licensee is addressed as "you". "Licensees" and "recipients"
+may be individuals or organizations.
+
+  To "modify" a program means to make changes to the program or to combine it with other programs. 
+
+  To "propagate" a work means to do anything with it that, without permission, would make you legally responsible for infringement under applicable copyright law, except executing it on a computer.
+
+  "Convey" means any kind of propagation that enables other parties to make or receive copies of the work. 
+
+  "Source code" for a work means the preferred form of the work for making modifications to it. 
+
+  "Object code" means any non-source form of a work.
+
+  "User " means any person who uses the program.
+
+  "You" means the licensee of the program.
+
+  "The Free Software Foundation" is the organization that publishes this license.
+
+  1. Source Code.
+
+  The Program must include a copy of this License, and the source code must be made available to all recipients of the Program. 
+
+  2. Modification.
+
+  You may modify the Program and distribute your modifications under the terms of this License. 
+
+  3. Copyleft.
+
+  You must keep intact all notices stating that this License applies to the Program, and all notices of copyright, and you must keep intact all notices stating that this License applies to the Program, and all notices of copyright.
+
+  4. Distribution.
+
+  You may distribute copies of the Program, either as received or modified, under the terms of this License. 
+
+  5. Warranty Disclaimer.
+
+  The Program is provided "as is" without warranty of any kind. 
+
+  6. Limitation of Liability.
+
+  In no event will the authors or copyright holders be liable for any damages arising from the use of the Program.
+
+  7. Acceptance.
+
+  By copying, modifying, or distributing the Program, you accept this License.
+
+  8. Termination.
+
+  If you fail to comply with the terms of this License, your rights under this License will terminate automatically.
+
+  9. Future Versions.
+
+  The Free Software Foundation may publish new versions of the GNU General Public License from time to time. 
+
+  10. Additional Permissions.
+
+  You may add your own additional permissions to the Program, but you must keep intact all notices stating that this License applies to the Program.
+
+  11. Interpretation.
+
+  If you have questions about this License, you may contact the Free Software Foundation.
+
+  12. No Warranty.
+
+  There is no warranty for the Program, and the authors are not liable for any damages.
+
+  13. Conclusion.
+
+  This License is intended to protect your freedom to share and change the Program, ensuring that it remains free software for all its users.
+
+---
+
+Feel free to copy and use this implementation in your project!

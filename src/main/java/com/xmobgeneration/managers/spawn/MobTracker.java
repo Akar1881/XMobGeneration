@@ -32,6 +32,18 @@ public class MobTracker {
         }
     }
 
+    public int getAreaMobCount(String areaName) {
+        Set<SpawnedMob> areaMobs = areaSpawnedMobs.get(areaName);
+        if (areaMobs == null) {
+            return 0;
+        }
+        
+        // Count only living mobs
+        return (int) areaMobs.stream()
+            .filter(mob -> !mob.isDead() && mob.getEntity() != null && !mob.getEntity().isDead())
+            .count();
+    }
+
     public void clearAreaMobs(String areaName) {
         Set<SpawnedMob> areaMobs = areaSpawnedMobs.remove(areaName);
         if (areaMobs != null) {
@@ -71,5 +83,9 @@ public class MobTracker {
 
     public SpawnedMob getMob(UUID entityId) {
         return trackedMobs.get(entityId);
+    }
+
+    public Collection<SpawnedMob> getAllMobs() {
+        return Collections.unmodifiableCollection(trackedMobs.values());
     }
 }
