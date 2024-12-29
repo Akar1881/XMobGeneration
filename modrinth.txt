@@ -1,0 +1,51 @@
+XMobGeneration - Advanced Mob Spawn Area Manager
+
+A powerful and user-friendly Minecraft plugin that gives server administrators complete control over mob spawning with customizable areas, drops, and mob configurations.
+
+🎮 Key Features:
+• Create and manage up to 45 custom mob spawn areas
+• Intuitive GUI interface for easy management
+• WorldEdit integration for simple area selection
+• Custom drops system with drag-and-drop interface
+• Advanced mob configuration with custom names and stats
+• Automatic area restart system
+
+🛠️ Mob Customization:
+• Custom names with level display
+• Configurable health and damage
+• Level system with visual indicators
+• Hologram display showing level, name, and health
+• Per-area mob statistics
+
+💎 Custom Drops:
+• GUI-based drop management
+• Enable/disable per area
+• Drag-and-drop item configuration
+• Automatic saving system
+
+⚙️ Technical Features:
+• Efficient spawn management
+• Configurable restart intervals
+• Persistent data storage
+• WorldEdit integration
+• Comprehensive command system
+
+📚 Documentation:
+Full documentation available in the README.md file, including:
+• Installation guide
+• Command reference
+• Configuration options
+• Usage tutorials
+
+🔧 Requirements:
+• Spigot/Paper 1.17+
+• WorldEdit plugin
+
+Perfect for:
+• RPG servers
+• Custom mob arenas
+• Spawn area management
+• Mob farming setups
+• Custom server experiences
+
+Active development and support through GitHub issues tracker.

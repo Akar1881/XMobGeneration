@@ -2,6 +2,7 @@ package com.xmobgeneration.gui;
 
 import com.xmobgeneration.XMobGeneration;
 import com.xmobgeneration.gui.menus.CustomDropsMenu;
+import com.xmobgeneration.gui.menus.MobStatsMenu;
 import com.xmobgeneration.models.SpawnArea;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -56,42 +57,6 @@ public class GUIManager {
         player.openInventory(gui);
     }
 
-    public void openAreaListGUI(Player player, String action) {
-        Map<String, SpawnArea> areas = plugin.getAreaManager().getAllAreas();
-        Inventory gui = Bukkit.createInventory(null, GUI_SIZE, "§8Areas - " + action);
-
-        int slot = 0;
-        for (SpawnArea area : areas.values()) {
-            if (slot >= 45) break; // Ensure we don't exceed 45 slots
-            
-            ItemStack item;
-            if (action.equals("list")) {
-                item = new ItemStack(area.isEnabled() ? Material.LIME_DYE : Material.GRAY_DYE);
-            } else {
-                item = new ItemStack(Material.PAPER);
-            }
-            
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName("§e" + area.getName());
-            
-            List<String> lore = new ArrayList<>();
-            lore.add("§7Mob Type: §f" + area.getMobType());
-            lore.add("§7Spawn Count: §f" + area.getSpawnCount());
-            lore.add("§7Respawn Delay: §f" + area.getRespawnDelay() + "s");
-            lore.add("");
-            lore.add(area.isEnabled() ? "§aEnabled" : "§cDisabled");
-            if (action.equals("list")) {
-                lore.add("§7Click to toggle spawning");
-            }
-            
-            meta.setLore(lore);
-            item.setItemMeta(meta);
-            gui.setItem(slot++, item);
-        }
-
-        player.openInventory(gui);
-    }
-
     public void openAreaEditGUI(Player player, SpawnArea area) {
         Inventory gui = Bukkit.createInventory(null, GUI_SIZE, "§8Edit Area - " + area.getName());
 
@@ -128,6 +93,20 @@ public class GUIManager {
         customDrops.setItemMeta(customDropsMeta);
         gui.setItem(31, customDrops);
 
+        // Mob Stats Button
+        ItemStack mobStats = new ItemStack(Material.CRAFTING_TABLE);
+        ItemMeta mobStatsMeta = mobStats.getItemMeta();
+        mobStatsMeta.setDisplayName("§eMob Stats");
+        List<String> mobStatsLore = new ArrayList<>();
+        mobStatsLore.add("§7Click to configure mob stats");
+        mobStatsLore.add("");
+        mobStatsLore.add("§7Health: §c" + area.getMobStats().getHealth() + "❤");
+        mobStatsLore.add("§7Damage: §e" + area.getMobStats().getDamage());
+        mobStatsLore.add("§7Level: §b" + area.getMobStats().getLevel());
+        mobStatsMeta.setLore(mobStatsLore);
+        mobStats.setItemMeta(mobStatsMeta);
+        gui.setItem(33, mobStats);
+
         // Toggle Spawning
         ItemStack toggleButton = new ItemStack(area.isEnabled() ? Material.LIME_DYE : Material.GRAY_DYE);
         ItemMeta toggleMeta = toggleButton.getItemMeta();
@@ -141,5 +120,45 @@ public class GUIManager {
 
     public void openCustomDropsMenu(Player player, SpawnArea area) {
         new CustomDropsMenu(plugin).openMenu(player, area);
+    }
+
+    public void openMobStatsMenu(Player player, SpawnArea area) {
+        new MobStatsMenu(plugin).openMenu(player, area);
+    }
+
+    public void openAreaListGUI(Player player, String action) {
+        Map<String, SpawnArea> areas = plugin.getAreaManager().getAllAreas();
+        Inventory gui = Bukkit.createInventory(null, GUI_SIZE, "§8Areas - " + action);
+
+        int slot = 0;
+        for (SpawnArea area : areas.values()) {
+            if (slot >= 45) break;
+            
+            ItemStack item;
+            if (action.equals("list")) {
+                item = new ItemStack(area.isEnabled() ? Material.LIME_DYE : Material.GRAY_DYE);
+            } else {
+                item = new ItemStack(Material.PAPER);
+            }
+            
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName("§e" + area.getName());
+            
+            List<String> lore = new ArrayList<>();
+            lore.add("§7Mob Type: §f" + area.getMobType());
+            lore.add("§7Spawn Count: §f" + area.getSpawnCount());
+            lore.add("§7Respawn Delay: §f" + area.getRespawnDelay() + "s");
+            lore.add("");
+            lore.add(area.isEnabled() ? "§aEnabled" : "§cDisabled");
+            if (action.equals("list")) {
+                lore.add("§7Click to toggle spawning");
+            }
+            
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+            gui.setItem(slot++, item);
+        }
+
+        player.openInventory(gui);
     }
 }

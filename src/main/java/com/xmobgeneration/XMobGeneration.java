@@ -5,6 +5,7 @@ import com.xmobgeneration.config.ConfigManager;
 import com.xmobgeneration.gui.GUIManager;
 import com.xmobgeneration.listeners.CustomDropsListener;
 import com.xmobgeneration.listeners.GUIListener;
+import com.xmobgeneration.listeners.MobDamageListener;
 import com.xmobgeneration.listeners.MobDeathListener;
 import com.xmobgeneration.managers.AreaManager;
 import com.xmobgeneration.managers.SpawnManager;
@@ -35,6 +36,7 @@ public class XMobGeneration extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GUIListener(this), this);
         getServer().getPluginManager().registerEvents(new MobDeathListener(this), this);
         getServer().getPluginManager().registerEvents(new CustomDropsListener(this), this);
+        getServer().getPluginManager().registerEvents(new MobDamageListener(this), this);
 
         getLogger().info("XMobGeneration has been enabled!");
     }

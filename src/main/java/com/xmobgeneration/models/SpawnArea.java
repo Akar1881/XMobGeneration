@@ -12,6 +12,7 @@ public class SpawnArea {
     private int respawnDelay;
     private boolean enabled;
     private CustomDrops customDrops;
+    private MobStats mobStats;
 
     public SpawnArea(String name, Location pos1, Location pos2) {
         this.name = name;
@@ -22,6 +23,7 @@ public class SpawnArea {
         this.respawnDelay = 30;
         this.enabled = true;
         this.customDrops = new CustomDrops();
+        this.mobStats = new MobStats();
     }
 
     public String getName() {
@@ -86,5 +88,13 @@ public class SpawnArea {
 
     public void setCustomDrops(CustomDrops customDrops) {
         this.customDrops = customDrops;
+    }
+
+    public MobStats getMobStats() {
+        return mobStats;
+    }
+
+    public void setMobStats(MobStats mobStats) {
+        this.mobStats = mobStats;
     }
 }

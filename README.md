@@ -10,6 +10,10 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
 - Customizable mob types, spawn counts, and respawn delays
 - Per-area spawn control
 - Custom drops system for each spawn area
+- Advanced mob configuration system
+  - Custom mob names with level display
+  - Configurable health and damage
+  - Level system with visual indicators
 - Automatic area restart system
 - Persistent data storage
 
@@ -30,6 +34,8 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
 - `/xmg create <name>` - Create a new spawn area
 - `/xmg delete <name>` - Delete a spawn area
 - `/xmg config <name> <mobType> <count> <delay>` - Configure an area
+- `/xmg setmobnames <areaname> <mobname>` - Set custom name for mobs in an area
+- `/xmg mobconfig <areaname> <health> <damage> <level>` - Configure mob stats
 - `/xmg list` - List all spawn areas
 - `/xmg gui` - Open the GUI interface
 - `/xmg help` - Show help message
@@ -58,43 +64,22 @@ Messages can also be customized in the configuration file.
 2. Create a spawn area using `/xmg create <name>`
 3. Configure the area using the GUI or commands
 4. Enable/disable spawning using the GUI
-5. Configure custom drops for each area through the GUI
+5. Configure custom drops and mob stats through the GUI
 
-## Custom Drops System
+## Mob Configuration System
 
-Each spawn area can have its own custom drops configuration:
+Each spawn area can have customized mob settings:
 
-1. Open the area edit menu and click the chest icon (slot 31)
-2. Drag and drop items into the first 45 slots of the inventory
-3. Use the dye button to toggle custom drops on/off
-4. Click the emerald button to manually save changes
-5. Changes are also saved automatically when closing the inventory
+1. Custom Names
+   - Use `/xmg setmobnames <area> <name>` or the GUI
+   - Names appear as holograms above mobs
+   - Format: [Lv.X] Name [Health❤]
 
-## Area Restart System
-
-Areas automatically restart at configurable intervals:
-
-- Set restart interval in config.yml (minimum 1 minute)
-- Warning message appears before restart
-- All mobs are respawned during restart
-- Area configurations are preserved
-- Helps prevent potential issues with long-running spawn areas
-
-## Building from Source
-
-1. Clone the repository
-2. Build using Maven:
-```bash
-mvn clean package
-```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the [GNU General Public License v3.0](LICENSE).
+2. Mob Stats
+   - Configure via `/xmg mobconfig` or GUI
+   - Adjustable health, damage, and level
+   - Changes apply to new and existing mobs
+   - Access through crafting table icon in area edit menu
 
 ## Support
 
@@ -102,21 +87,6 @@ If you encounter any issues or have questions:
 1. Check the [Issues](https://github.com/Akar1881/XMobGeneration/issues) page
 2. Create a new issue if your problem isn't already listed
 
-## Changelog
+## License
 
-See [changelog.txt](changelog.txt) for detailed version history.
-
-### Latest Changes (v1.1.0)
-- Added custom drops system with GUI interface
-- Implemented area restart system
-- Improved inventory handling
-- Added automatic and manual saving for custom drops
-- Fixed item dragging functionality
-
-## Credits
-
-- Built with Spigot API
-- Uses WorldEdit for area selection
-
-## YouTube ShowCase
-[XMobGeneration Minecraft Plugin ShowCase](https://youtu.be/Yhy6eI6yiuA?feature=shared)
+This project is licensed under the [GNU General Public License v3.0](LICENSE).

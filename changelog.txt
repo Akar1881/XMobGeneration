@@ -1,5 +1,25 @@
 # XMobGeneration Changelog
 
+## Version 1.2.0 (2024-12-29)
+
+### Added
+- Mob Configuration System
+  - Custom mob names with level display
+  - Configurable health and damage per area
+  - Level system with visual indicators
+  - Hologram display format: [Lv.X] Name [Health❤]
+  - GUI interface for mob stat configuration
+  - New commands:
+    - /xmg setmobnames
+    - /xmg mobconfig
+
+### Technical Changes
+- Added MobStats model for storing mob configurations
+- Implemented MobStatsMenu for GUI configuration
+- Added MobDamageListener for custom damage handling
+- Enhanced SpawnManager with mob stat application
+- Updated area configuration storage
+
 ## Version 1.1.0 (2024-12-29)
 
 ### Added

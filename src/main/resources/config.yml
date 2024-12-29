@@ -2,7 +2,6 @@ settings:
   default-mob-type: ZOMBIE
   default-spawn-count: 5
   default-respawn-delay: 30
-  # Restart interval in minutes (must be greater than 1)
   restart-interval: 10
 
 messages:
@@ -13,12 +12,16 @@ messages:
   area-exists: "&cA spawn area with that name already exists!"
   area-configured: "&aSpawn area %name% has been configured!"
   invalid-mob-type: "&cInvalid mob type specified!"
-  invalid-numbers: "&cSpawn count and respawn delay must be greater than 0!"
+  invalid-numbers: "&cInvalid number format! Please use valid numbers."
   no-selection: "&cYou must make a WorldEdit selection first!"
   selection-error: "&cError getting WorldEdit selection!"
   usage-createarea: "&cUsage: /xmg createarea <name>"
   usage-deletearea: "&cUsage: /xmg deletearea <name>"
   usage-configarea: "&cUsage: /xmg configarea <name> <mobType> <spawnCount> <respawnDelay>"
+  usage-setmobnames: "&cUsage: /xmg setmobnames <areaname> <mobname>"
+  usage-mobconfig: "&cUsage: /xmg mobconfig <areaname> <health> <damage> <level>"
+  mobname-set: "&aMob name for area %name% has been set to '%mobname%'!"
+  mobconfig-set: "&aMob stats for area %name% updated: Health: %health%, Damage: %damage%, Level: %level%"
   pos1-set: "&aPosition 1 set!"
   pos2-set: "&aPosition 2 set!"
   max-areas-reached: "&cMaximum number of areas (45) has been reached!"
