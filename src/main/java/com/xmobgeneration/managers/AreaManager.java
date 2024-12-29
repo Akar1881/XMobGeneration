@@ -3,6 +3,7 @@ package com.xmobgeneration.managers;
 import com.xmobgeneration.XMobGeneration;
 import com.xmobgeneration.models.SpawnArea;
 import com.xmobgeneration.models.CustomDrops;
+import com.xmobgeneration.models.MobStats;
 import com.xmobgeneration.utils.LocationSerializer;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
@@ -104,6 +105,18 @@ public class AreaManager {
                 area.setCustomDrops(customDrops);
             }
 
+            // Load mob stats
+            ConfigurationSection mobStatsSection = areaSection.getConfigurationSection("mobStats");
+            if (mobStatsSection != null) {
+                MobStats mobStats = new MobStats();
+                mobStats.setMobName(mobStatsSection.getString("mobName", "Monster"));
+                mobStats.setHealth(mobStatsSection.getDouble("health", 20.0));
+                mobStats.setDamage(mobStatsSection.getDouble("damage", 2.0));
+                mobStats.setLevel(mobStatsSection.getInt("level", 1));
+                mobStats.setShowName(mobStatsSection.getBoolean("showName", false));
+                area.setMobStats(mobStats);
+            }
+
             spawnAreas.put(name, area);
             if (area.isEnabled()) {
                 plugin.getSpawnManager().startSpawning(area);
@@ -131,6 +144,15 @@ public class AreaManager {
             CustomDrops customDrops = area.getCustomDrops();
             customDropsSection.set("enabled", customDrops.isEnabled());
             customDropsSection.set("items", customDrops.getItems());
+
+            // Save mob stats
+            ConfigurationSection mobStatsSection = areaSection.createSection("mobStats");
+            MobStats mobStats = area.getMobStats();
+            mobStatsSection.set("mobName", mobStats.getMobName());
+            mobStatsSection.set("health", mobStats.getHealth());
+            mobStatsSection.set("damage", mobStats.getDamage());
+            mobStatsSection.set("level", mobStats.getLevel());
+            mobStatsSection.set("showName", mobStats.isShowName());
         }
 
         try {
