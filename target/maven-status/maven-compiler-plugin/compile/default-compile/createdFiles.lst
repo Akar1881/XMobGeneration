@@ -8,11 +8,13 @@ com\xmobgeneration\managers\spawn\LocationFinder.class
 com\xmobgeneration\listeners\MobDeathListener.class
 com\xmobgeneration\config\ConfigManager.class
 com\xmobgeneration\XMobGeneration.class
+com\xmobgeneration\managers\RestartManager.class
 com\xmobgeneration\managers\SpawnManager.class
 com\xmobgeneration\commands\subcommands\DeleteAreaCommand.class
 com\xmobgeneration\managers\AreaManager.class
 com\xmobgeneration\commands\subcommands\ListAreasCommand.class
 com\xmobgeneration\listeners\AreaSelectionListener.class
+com\xmobgeneration\managers\RestartManager$1.class
 com\xmobgeneration\commands\subcommands\ConfigAreaCommand.class
 com\xmobgeneration\gui\menus\MobTypeMenu$1.class
 com\xmobgeneration\models\SpawnedMob.class

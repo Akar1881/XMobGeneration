@@ -41,6 +41,19 @@ public class MobTracker {
         }
     }
 
+    public void despawnAreaMobs(String areaName) {
+        Set<SpawnedMob> areaMobs = areaSpawnedMobs.get(areaName);
+        if (areaMobs != null) {
+            for (SpawnedMob mob : new HashSet<>(areaMobs)) {
+                Entity entity = mob.getEntity();
+                if (entity != null && !entity.isDead()) {
+                    entity.remove();
+                }
+                removeTrackedMob(mob);
+            }
+        }
+    }
+
     public List<SpawnedMob> getDeadMobsReadyToRespawn(long currentTime, int respawnDelay) {
         List<SpawnedMob> mobsToRespawn = new ArrayList<>();
         for (Set<SpawnedMob> areaMobs : areaSpawnedMobs.values()) {

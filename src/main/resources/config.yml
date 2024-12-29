@@ -20,3 +20,5 @@ messages:
   pos1-set: "&aPosition 1 set!"
   pos2-set: "&aPosition 2 set!"
   max-areas-reached: "&cMaximum number of areas (45) has been reached!"
+  restart-warning: "&e&lAll mob areas will be reset in %minutes% minute(s)!"
+  restart-complete: "&a&lAll mob areas have been successfully reset!"

@@ -43,6 +43,14 @@ public class SpawnManager {
         performInitialSpawn(area);
     }
 
+    public void restartArea(SpawnArea area) {
+        // First, despawn all existing mobs in this area
+        mobTracker.despawnAreaMobs(area.getName());
+        
+        // Then start spawning new mobs
+        startSpawning(area);
+    }
+
     private void performInitialSpawn(SpawnArea area) {
         int attempts = 0;
         int maxAttempts = area.getSpawnCount() * 3;

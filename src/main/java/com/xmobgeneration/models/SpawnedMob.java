@@ -1,6 +1,7 @@
 package com.xmobgeneration.models;
 
 import org.bukkit.Location;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import java.util.UUID;
 
@@ -44,5 +45,9 @@ public class SpawnedMob {
 
     public void setDead(boolean dead) {
         isDead = dead;
+    }
+
+    public Entity getEntity() {
+        return Bukkit.getEntity(entityId);
     }
 }

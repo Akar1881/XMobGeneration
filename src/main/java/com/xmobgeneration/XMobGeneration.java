@@ -7,6 +7,7 @@ import com.xmobgeneration.listeners.GUIListener;
 import com.xmobgeneration.listeners.MobDeathListener;
 import com.xmobgeneration.managers.AreaManager;
 import com.xmobgeneration.managers.SpawnManager;
+import com.xmobgeneration.managers.RestartManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class XMobGeneration extends JavaPlugin {
@@ -15,6 +16,7 @@ public class XMobGeneration extends JavaPlugin {
     private AreaManager areaManager;
     private SpawnManager spawnManager;
     private GUIManager guiManager;
+    private RestartManager restartManager;
 
     @Override
     public void onEnable() {
@@ -25,6 +27,7 @@ public class XMobGeneration extends JavaPlugin {
         this.spawnManager = new SpawnManager(this);
         this.areaManager = new AreaManager(this);
         this.guiManager = new GUIManager(this);
+        this.restartManager = new RestartManager(this);
 
         // Register commands and listeners
         getCommand("xmg").setExecutor(new CommandManager(this));
@@ -36,6 +39,9 @@ public class XMobGeneration extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (restartManager != null) {
+            restartManager.stop();
+        }
         if (areaManager != null) {
             areaManager.saveAreas();
         }
