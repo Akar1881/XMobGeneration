@@ -94,4 +94,8 @@ public class SpawnManager {
         
         return area.isEnabled();
     }
+
+    public MobTracker getMobTracker() {
+        return mobTracker;
+    }
 }

@@ -1,6 +1,8 @@
 com\xmobgeneration\commands\CommandManager.class
 com\xmobgeneration\commands\SubCommand.class
+com\xmobgeneration\gui\menus\CustomDropsMenu.class
 com\xmobgeneration\commands\subcommands\CreateAreaCommand.class
+com\xmobgeneration\listeners\CustomDropsListener.class
 com\xmobgeneration\models\SpawnArea.class
 com\xmobgeneration\listeners\MobSpawnListener.class
 com\xmobgeneration\utils\MessageUtils.class
@@ -26,6 +28,7 @@ com\xmobgeneration\utils\LocationSerializer.class
 com\xmobgeneration\commands\subcommands\HelpCommand.class
 com\xmobgeneration\managers\spawn\RespawnTask.class
 com\xmobgeneration\gui\menus\AreaEditMenu.class
+com\xmobgeneration\models\CustomDrops.class
 com\xmobgeneration\gui\GUIManager.class
 com\xmobgeneration\listeners\GUIListener$1.class
 com\xmobgeneration\managers\spawn\MobTracker.class

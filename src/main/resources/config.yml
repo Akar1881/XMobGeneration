@@ -3,7 +3,7 @@ settings:
   default-spawn-count: 5
   default-respawn-delay: 30
   # Restart interval in minutes (must be greater than 1)
-  restart-interval: 2
+  restart-interval: 10
 
 messages:
   prefix: "&8[&bXMobGeneration&8] &7"

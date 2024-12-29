@@ -1,10 +1,10 @@
 package com.xmobgeneration.gui;
 
 import com.xmobgeneration.XMobGeneration;
+import com.xmobgeneration.gui.menus.CustomDropsMenu;
 import com.xmobgeneration.models.SpawnArea;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class GUIManager {
     private final XMobGeneration plugin;
-    private static final int GUI_SIZE = 54; // Updated to support 45 areas (6 rows x 9 columns)
+    private static final int GUI_SIZE = 54;
 
     public GUIManager(XMobGeneration plugin) {
         this.plugin = plugin;
@@ -89,9 +89,6 @@ public class GUIManager {
             gui.setItem(slot++, item);
         }
 
-        // Add navigation buttons in the bottom row if needed
-        // Slots 45-53 can be used for navigation or additional controls
-
         player.openInventory(gui);
     }
 
@@ -119,14 +116,30 @@ public class GUIManager {
         respawnDelay.setItemMeta(respawnDelayMeta);
         gui.setItem(15, respawnDelay);
 
+        // Custom Drops Button
+        ItemStack customDrops = new ItemStack(Material.CHEST);
+        ItemMeta customDropsMeta = customDrops.getItemMeta();
+        customDropsMeta.setDisplayName("§eCustom Drops");
+        List<String> customDropsLore = new ArrayList<>();
+        customDropsLore.add("§7Click to configure custom drops");
+        customDropsLore.add("");
+        customDropsLore.add(area.getCustomDrops().isEnabled() ? "§aEnabled" : "§cDisabled");
+        customDropsMeta.setLore(customDropsLore);
+        customDrops.setItemMeta(customDropsMeta);
+        gui.setItem(31, customDrops);
+
         // Toggle Spawning
         ItemStack toggleButton = new ItemStack(area.isEnabled() ? Material.LIME_DYE : Material.GRAY_DYE);
         ItemMeta toggleMeta = toggleButton.getItemMeta();
         toggleMeta.setDisplayName(area.isEnabled() ? "§aEnabled" : "§cDisabled");
         toggleMeta.setLore(Arrays.asList("§7Click to toggle spawning"));
         toggleButton.setItemMeta(toggleMeta);
-        gui.setItem(49, toggleButton); // Centered in the bottom row
+        gui.setItem(49, toggleButton);
 
         player.openInventory(gui);
+    }
+
+    public void openCustomDropsMenu(Player player, SpawnArea area) {
+        new CustomDropsMenu(plugin).openMenu(player, area);
     }
 }

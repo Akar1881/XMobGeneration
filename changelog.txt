@@ -1,0 +1,43 @@
+# XMobGeneration Changelog
+
+## Version 1.1.0 (2024-12-29)
+
+### Added
+- Custom Drops System
+  - Added GUI interface for managing custom drops per spawn area
+  - Added chest button in slot 31 of area edit menu
+  - Added toggle button for enabling/disabling custom drops
+  - Added save button for manual saving
+  - Implemented drag-and-drop functionality for items
+  - Added automatic saving when closing the inventory
+  - First 45 slots available for custom drop items
+
+- Area Restart System
+  - Added automatic area restart functionality
+  - Configurable restart interval (minimum 1 minute)
+  - Warning message before restart
+  - Complete reset of all mob spawns during restart
+  - Persistence of area configurations through restarts
+
+### Fixed
+- Item dragging functionality in custom drops menu
+- Slot restrictions for bottom row buttons
+- Inventory interaction handling
+
+### Technical Changes
+- Added CustomDropsMenu implementation
+- Enhanced GUIListener with custom drops handlers
+- Added InventoryDragEvent support
+- Added InventoryCloseEvent handler
+- Implemented RestartManager for area resets
+- Added configuration options for restart intervals
+
+## Version 1.0.0 (2024-12-28)
+
+### Initial Release
+- Basic spawn area management
+- GUI interface
+- WorldEdit integration
+- Configurable mob spawning
+- Area creation and deletion
+- Spawn control per area

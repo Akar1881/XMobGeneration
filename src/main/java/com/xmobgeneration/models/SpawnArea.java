@@ -11,6 +11,7 @@ public class SpawnArea {
     private int spawnCount;
     private int respawnDelay;
     private boolean enabled;
+    private CustomDrops customDrops;
 
     public SpawnArea(String name, Location pos1, Location pos2) {
         this.name = name;
@@ -20,6 +21,7 @@ public class SpawnArea {
         this.spawnCount = 5;
         this.respawnDelay = 30;
         this.enabled = true;
+        this.customDrops = new CustomDrops();
     }
 
     public String getName() {
@@ -76,5 +78,13 @@ public class SpawnArea {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public CustomDrops getCustomDrops() {
+        return customDrops;
+    }
+
+    public void setCustomDrops(CustomDrops customDrops) {
+        this.customDrops = customDrops;
     }
 }
