@@ -117,3 +117,6 @@ See [changelog.txt](changelog.txt) for detailed version history.
 
 - Built with Spigot API
 - Uses WorldEdit for area selection
+
+## YouTube ShowCase
+[XMobGeneration Minecraft Plugin ShowCase](https://youtu.be/Yhy6eI6yiuA?feature=shared)

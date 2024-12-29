@@ -2,16 +2,19 @@ package com.xmobgeneration.managers;
 
 import com.xmobgeneration.XMobGeneration;
 import com.xmobgeneration.models.SpawnArea;
+import com.xmobgeneration.models.CustomDrops;
 import com.xmobgeneration.utils.LocationSerializer;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AreaManager {
@@ -19,7 +22,7 @@ public class AreaManager {
     private final Map<String, SpawnArea> spawnAreas;
     private final File areasFile;
     private FileConfiguration areasConfig;
-    private static final int MAX_AREAS = 45; // Added maximum area limit
+    private static final int MAX_AREAS = 45;
 
     public AreaManager(XMobGeneration plugin) {
         this.plugin = plugin;
@@ -86,6 +89,21 @@ public class AreaManager {
             area.setRespawnDelay(areaSection.getInt("respawnDelay", 30));
             area.setEnabled(areaSection.getBoolean("enabled", true));
 
+            // Load custom drops
+            ConfigurationSection customDropsSection = areaSection.getConfigurationSection("customDrops");
+            if (customDropsSection != null) {
+                CustomDrops customDrops = new CustomDrops();
+                customDrops.setEnabled(customDropsSection.getBoolean("enabled", false));
+                
+                @SuppressWarnings("unchecked")
+                List<ItemStack> items = (List<ItemStack>) customDropsSection.getList("items");
+                if (items != null) {
+                    customDrops.setItems(items);
+                }
+                
+                area.setCustomDrops(customDrops);
+            }
+
             spawnAreas.put(name, area);
             if (area.isEnabled()) {
                 plugin.getSpawnManager().startSpawning(area);
@@ -107,6 +125,12 @@ public class AreaManager {
             areaSection.set("spawnCount", area.getSpawnCount());
             areaSection.set("respawnDelay", area.getRespawnDelay());
             areaSection.set("enabled", area.isEnabled());
+
+            // Save custom drops
+            ConfigurationSection customDropsSection = areaSection.createSection("customDrops");
+            CustomDrops customDrops = area.getCustomDrops();
+            customDropsSection.set("enabled", customDrops.isEnabled());
+            customDropsSection.set("items", customDrops.getItems());
         }
 
         try {
