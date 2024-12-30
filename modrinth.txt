@@ -6,6 +6,7 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • Create and manage up to 45 custom mob spawn areas
 • Intuitive GUI interface for easy management
 • WorldEdit integration for simple area selection
+• Support for both vanilla mobs and MythicMobs
 • Custom drops system with drag-and-drop interface
   - Easy item management through GUI
   - Configurable drop chances in areas.yml
@@ -40,6 +41,13 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • Visual equipment slot indicators
 • Easy equipment management through GUI
 
+🧙‍♂️ MythicMobs Integration:
+• Seamless integration with MythicMobs plugin
+• Spawn custom MythicMobs in your areas
+• Use 'mythic:mobtype' format for easy configuration
+• Automatic level scaling support
+• Works perfectly without MythicMobs installed
+
 ⚙️ Technical Features:
 • Efficient spawn management
 • Configurable restart intervals
@@ -54,10 +62,12 @@ Full documentation available in the README.md file, including:
 • Command reference
 • Configuration options
 • Usage tutorials
+• MythicMobs integration guide
 
 🔧 Requirements:
 • Spigot/Paper 1.17+
 • WorldEdit plugin
+• MythicMobs plugin (Optional)
 
 Perfect for:
 • RPG servers

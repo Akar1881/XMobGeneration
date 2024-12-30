@@ -1,5 +1,30 @@
 # XMobGeneration Changelog
 
+## Version 1.6.0 (2024-12-30)
+
+### Added
+- MythicMobs Integration
+  - Support for spawning MythicMobs in spawn areas
+  - Use 'mythic:mobtype' format in mob configuration
+  - Automatic level scaling for MythicMobs
+  - Proper handling of MythicMobs stats and abilities
+  - Soft dependency integration - works with or without MythicMobs
+- New mob type format support:
+  - Vanilla mobs: Use regular mob types (e.g., ZOMBIE, SKELETON)
+  - MythicMobs: Use 'mythic:' prefix (e.g., mythic:CustomBoss)
+
+### Changed
+- Enhanced mob spawning system to handle both vanilla and MythicMobs
+- Improved configuration validation for mob types
+- Better error handling for missing MythicMobs types
+- Updated command system to support MythicMobs syntax
+
+### Technical
+- Added MythicMobsManager for handling MythicMobs integration
+- Improved mob type validation system
+- Enhanced spawn handling for different mob types
+- Added safety checks for MythicMobs dependency
+
 ## Version 1.5.0 (2024-12-30)
 
 ### Added
