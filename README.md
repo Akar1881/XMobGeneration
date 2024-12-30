@@ -10,6 +10,9 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
 - Customizable mob types, spawn counts, and respawn delays
 - Per-area spawn control
 - Custom drops system for each spawn area
+  - Easy item management through GUI
+  - Configurable drop chances in areas.yml
+  - Default 100% drop chance for new items
 - Advanced mob configuration system
   - Custom mob names with level display
   - Configurable health and damage
@@ -44,6 +47,7 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
 - `/xmg mobconfig <areaname> <health> <damage> <level>` - Configure mob stats
 - `/xmg list` - List all spawn areas
 - `/xmg gui` - Open the GUI interface
+- `/xmg reload` - Reload configuration and restart all mob areas
 - `/xmg help` - Show help message
 
 ## Permissions

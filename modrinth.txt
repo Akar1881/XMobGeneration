@@ -7,6 +7,9 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • Intuitive GUI interface for easy management
 • WorldEdit integration for simple area selection
 • Custom drops system with drag-and-drop interface
+  - Easy item management through GUI
+  - Configurable drop chances in areas.yml
+  - Default 100% drop chance for new items
 • Advanced mob configuration with custom names and stats
 • Custom mob equipment system with GUI interface
 • Automatic area restart system
@@ -23,6 +26,7 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • GUI-based drop management
 • Enable/disable per area
 • Drag-and-drop item configuration
+• Configurable drop chances through areas.yml
 • Automatic saving system
 
 ⚔️ Equipment System:
@@ -38,6 +42,7 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • Persistent data storage
 • WorldEdit integration
 • Comprehensive command system
+• Easy configuration reload
 
 📚 Documentation:
 Full documentation available in the README.md file, including:

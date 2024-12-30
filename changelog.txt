@@ -1,5 +1,23 @@
 # XMobGeneration Changelog
 
+## Version 1.5.0 (2024-12-30)
+
+### Added
+- New reload command (/xmg reload) to refresh configuration and restart mob areas
+- Default 100% drop chance for newly added custom drops
+- Ability to edit drop chances through areas.yml
+- Improved custom drops menu with cleaner lore handling
+
+### Changed
+- Custom drops now show current drop chance in GUI
+- Simplified drop chance management through configuration
+- Better lore handling for custom drop items
+
+### Fixed
+- Fixed ItemMeta handling in CustomDropsMenu
+- Improved lore cleanup when saving items
+- Better null checks for item metadata
+
 ## Version 1.4.0 (2024-12-30)
 
 ### Added

@@ -30,6 +30,7 @@ com\xmobgeneration\gui\menus\MobTypeMenu$1.class
 com\xmobgeneration\models\SpawnedMob.class
 com\xmobgeneration\commands\subcommands\GuiCommand.class
 com\xmobgeneration\utils\GuiUtils.class
+com\xmobgeneration\commands\subcommands\ReloadCommand.class
 com\xmobgeneration\listeners\GUIListener.class
 com\xmobgeneration\gui\menus\MobTypeMenu.class
 com\xmobgeneration\utils\LocationSerializer.class

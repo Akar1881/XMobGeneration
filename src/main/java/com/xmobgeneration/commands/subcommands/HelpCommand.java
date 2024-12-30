@@ -21,6 +21,7 @@ public class HelpCommand implements SubCommand {
         player.sendMessage("§e/xmg mobconfig <areaname> <mobHealth> <mobDamage> <mobLevel> §7- Configure Mobs in an area");
         player.sendMessage("§e/xmg list §7- List all spawn areas");
         player.sendMessage("§e/xmg gui §7- Open the GUI");
+        player.sendMessage("§e/xmg reload §7- Reload config and restart all mob areas");
         player.sendMessage("§e/xmg help §7- Show this help message");
         return true;
     }
