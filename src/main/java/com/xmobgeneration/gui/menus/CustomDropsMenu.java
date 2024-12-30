@@ -9,16 +9,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CustomDropsMenu {
     private final XMobGeneration plugin;
     private static final int DROPS_INVENTORY_SIZE = 54;
     private static final int TOGGLE_BUTTON_SLOT = 49;
     private static final int SAVE_BUTTON_SLOT = 53;
+    
+    private final Map<String, Map<Integer, Double>> areaItemChances = new HashMap<>();
 
     public CustomDropsMenu(XMobGeneration plugin) {
         this.plugin = plugin;
@@ -28,7 +33,16 @@ public class CustomDropsMenu {
         Inventory gui = Bukkit.createInventory(null, DROPS_INVENTORY_SIZE, 
             "§8Custom Drops - " + area.getName());
 
-        // Add existing custom drops
+        Map<Integer, Double> itemChances = areaItemChances.computeIfAbsent(
+            area.getName(), 
+            k -> new HashMap<>()
+        );
+
+        populateInventory(gui, area, itemChances);
+        player.openInventory(gui);
+    }
+
+    private void populateInventory(Inventory gui, SpawnArea area, Map<Integer, Double> itemChances) {
         int slot = 0;
         List<ItemStack> items = area.getCustomDrops().getItems();
         List<Double> chances = area.getCustomDrops().getChances();
@@ -39,12 +53,12 @@ public class CustomDropsMenu {
                 ItemMeta meta = item.getItemMeta();
                 if (meta != null) {
                     List<String> lore = meta.hasLore() ? new ArrayList<>(meta.getLore()) : new ArrayList<>();
-                    
-                    // Remove any existing chance lore
                     lore.removeIf(line -> line.contains("Drop Chance:") || line.contains("Edit chance"));
                     
-                    // Add current chance lore
-                    lore.add("§7Drop Chance: §e" + chances.get(i) + "%");
+                    double chance = chances.get(i);
+                    itemChances.put(slot, chance);
+                    
+                    lore.add("§7Drop Chance: §e" + chance + "%");
                     lore.add("§7Edit chance in areas.yml");
                     
                     meta.setLore(lore);
@@ -54,14 +68,8 @@ public class CustomDropsMenu {
             }
         }
 
-        // Add toggle button
-        boolean enabled = area.getCustomDrops().isEnabled();
-        gui.setItem(TOGGLE_BUTTON_SLOT, createToggleButton(enabled));
-
-        // Add save button
+        gui.setItem(TOGGLE_BUTTON_SLOT, createToggleButton(area.getCustomDrops().isEnabled()));
         gui.setItem(SAVE_BUTTON_SLOT, createSaveButton());
-
-        player.openInventory(gui);
     }
 
     private ItemStack createToggleButton(boolean enabled) {
@@ -82,40 +90,59 @@ public class CustomDropsMenu {
             meta.setDisplayName("§aSave Changes");
             meta.setLore(Arrays.asList(
                 "§7Click to save custom drops",
-                "§7All new items will have 100% drop chance",
-                "§7Edit chances in areas.yml"
+                "§7Preserves existing drop chances",
+                "§7New items will have 100% drop chance"
             ));
             button.setItemMeta(meta);
         }
         return button;
     }
 
+    public void handleInventoryClose(InventoryCloseEvent event, SpawnArea area) {
+        List<ItemStack> items = new ArrayList<>();
+        List<Double> chances = new ArrayList<>();
+        Map<Integer, Double> itemChances = areaItemChances.getOrDefault(area.getName(), new HashMap<>());
+        
+        for (int i = 0; i < 45; i++) {
+            ItemStack item = event.getInventory().getItem(i);
+            if (item != null) {
+                items.add(cleanItem(item.clone()));
+                chances.add(itemChances.getOrDefault(i, 100.0));
+            }
+        }
+        
+        area.getCustomDrops().setItems(items, chances);
+        plugin.getAreaManager().saveAreas();
+        areaItemChances.remove(area.getName());
+    }
+
+    private ItemStack cleanItem(ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            List<String> lore = meta.hasLore() ? new ArrayList<>(meta.getLore()) : new ArrayList<>();
+            lore.removeIf(line -> line.contains("Drop Chance:") || line.contains("Edit chance"));
+            meta.setLore(lore.isEmpty() ? null : lore);
+            item.setItemMeta(meta);
+        }
+        return item;
+    }
+
     public void saveCustomDrops(Player player, SpawnArea area) {
         Inventory inv = player.getOpenInventory().getTopInventory();
         List<ItemStack> items = new ArrayList<>();
         List<Double> chances = new ArrayList<>();
+        Map<Integer, Double> itemChances = areaItemChances.getOrDefault(area.getName(), new HashMap<>());
 
         for (int i = 0; i < 45; i++) {
             ItemStack item = inv.getItem(i);
             if (item != null) {
-                ItemStack cleanItem = item.clone();
-                ItemMeta meta = cleanItem.getItemMeta();
-                if (meta != null) {
-                    List<String> lore = meta.hasLore() ? new ArrayList<>(meta.getLore()) : new ArrayList<>();
-                    
-                    // Remove any chance-related lore
-                    lore.removeIf(line -> line.contains("Drop Chance:") || line.contains("Edit chance"));
-                    
-                    // Set cleaned lore or null if empty
-                    meta.setLore(lore.isEmpty() ? null : lore);
-                    cleanItem.setItemMeta(meta);
-                }
-                items.add(cleanItem);
-                chances.add(100.0); // Set default 100% chance for all items
+                items.add(cleanItem(item.clone()));
+                chances.add(itemChances.getOrDefault(i, 100.0));
             }
         }
 
         area.getCustomDrops().setItems(items, chances);
         plugin.getAreaManager().saveAreas();
+        areaItemChances.remove(area.getName());
     }
 }

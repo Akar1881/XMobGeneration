@@ -34,6 +34,7 @@ public class XMobGeneration extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MobDeathListener(this), this);
         getServer().getPluginManager().registerEvents(new CustomDropsListener(this), this);
         getServer().getPluginManager().registerEvents(new MobDamageListener(this), this);
+        getServer().getPluginManager().registerEvents(new CustomDropsMenuListener(this), this);
         getServer().getPluginManager().registerEvents(new MobContainmentListener(this), this);
 
         // Initialize spawning after all areas are loaded

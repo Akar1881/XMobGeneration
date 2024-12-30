@@ -10,6 +10,8 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
   - Easy item management through GUI
   - Configurable drop chances in areas.yml
   - Default 100% drop chance for new items
+  - Persistent drop chances
+  - Clean item lore handling
 • Advanced mob configuration with custom names and stats
 • Custom mob equipment system with GUI interface
 • Automatic area restart system
@@ -27,6 +29,8 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • Enable/disable per area
 • Drag-and-drop item configuration
 • Configurable drop chances through areas.yml
+• Persistent drop chances
+• Clean item lore handling
 • Automatic saving system
 
 ⚔️ Equipment System:

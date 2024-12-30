@@ -12,11 +12,15 @@
 - Custom drops now show current drop chance in GUI
 - Simplified drop chance management through configuration
 - Better lore handling for custom drop items
+- Fixed custom drops preserving original item lore when dropped
+- Improved chance persistence in custom drops menu
 
 ### Fixed
-- Fixed ItemMeta handling in CustomDropsMenu
+- ItemMeta handling in CustomDropsMenu
 - Improved lore cleanup when saving items
 - Better null checks for item metadata
+- Fixed custom drops chance reset on GUI close
+- Preserved existing drop chances when saving items
 
 ## Version 1.4.0 (2024-12-30)
 

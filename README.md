@@ -13,6 +13,8 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
   - Easy item management through GUI
   - Configurable drop chances in areas.yml
   - Default 100% drop chance for new items
+  - Persistent drop chances
+  - Clean item lore handling
 - Advanced mob configuration system
   - Custom mob names with level display
   - Configurable health and damage
@@ -75,21 +77,6 @@ Messages can also be customized in the configuration file.
 3. Configure the area using the GUI or commands
 4. Enable/disable spawning using the GUI
 5. Configure custom drops and mob stats through the GUI
-
-## Mob Configuration System
-
-Each spawn area can have customized mob settings:
-
-1. Custom Names
-   - Use `/xmg setmobnames <area> <name>` or the GUI
-   - Names appear as holograms above mobs
-   - Format: [Lv.X] Name [Health❤]
-
-2. Mob Stats
-   - Configure via `/xmg mobconfig` or GUI
-   - Adjustable health, damage, and level
-   - Changes apply to new and existing mobs
-   - Access through crafting table icon in area edit menu
 
 ## Support
 
