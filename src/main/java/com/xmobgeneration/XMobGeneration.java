@@ -46,12 +46,23 @@ public class XMobGeneration extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // Stop the restart manager first
         if (restartManager != null) {
             restartManager.stop();
         }
+
+        // Despawn all mobs from all areas
+        if (spawnManager != null) {
+            for (String areaName : areaManager.getAllAreas().keySet()) {
+                spawnManager.getMobTracker().despawnAreaMobs(areaName);
+            }
+        }
+
+        // Save areas configuration last
         if (areaManager != null) {
             areaManager.saveAreas();
         }
+
         getLogger().info("XMobGeneration has been disabled!");
     }
 
