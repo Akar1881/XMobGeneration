@@ -1,8 +1,9 @@
 name: XMobGeneration
-version: 1.2
+version: 1.5
 main: com.xmobgeneration.XMobGeneration
 api-version: 1.17
 depend: [WorldEdit]
+softdepend: [MythicMobs]
 commands:
   xmg:
     description: Main command for XMobGeneration plugin

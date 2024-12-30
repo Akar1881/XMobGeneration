@@ -7,6 +7,7 @@ import com.xmobgeneration.listeners.*;
 import com.xmobgeneration.managers.AreaManager;
 import com.xmobgeneration.managers.SpawnManager;
 import com.xmobgeneration.managers.RestartManager;
+import com.xmobgeneration.mythicmobs.MythicMobsManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class XMobGeneration extends JavaPlugin {
@@ -16,6 +17,7 @@ public class XMobGeneration extends JavaPlugin {
     private SpawnManager spawnManager;
     private GUIManager guiManager;
     private RestartManager restartManager;
+    private MythicMobsManager mythicMobsManager;
 
     @Override
     public void onEnable() {
@@ -23,6 +25,7 @@ public class XMobGeneration extends JavaPlugin {
         
         // Initialize managers in correct order
         this.configManager = new ConfigManager(this);
+        this.mythicMobsManager = new MythicMobsManager(this);
         this.spawnManager = new SpawnManager(this);
         this.areaManager = new AreaManager(this);
         this.guiManager = new GUIManager(this);
@@ -40,26 +43,27 @@ public class XMobGeneration extends JavaPlugin {
         // Initialize spawning after all areas are loaded
         getServer().getScheduler().runTaskLater(this, () -> {
             areaManager.initializeSpawning();
-        }, 20L); // Wait 1 second to ensure everything is loaded
+        }, 20L);
+
+        if (mythicMobsManager.isMythicMobsEnabled()) {
+            getLogger().info("MythicMobs support enabled!");
+        }
 
         getLogger().info("XMobGeneration has been enabled!");
     }
 
     @Override
     public void onDisable() {
-        // Stop the restart manager first
         if (restartManager != null) {
             restartManager.stop();
         }
 
-        // Despawn all mobs from all areas
         if (spawnManager != null) {
             for (String areaName : areaManager.getAllAreas().keySet()) {
                 spawnManager.getMobTracker().despawnAreaMobs(areaName);
             }
         }
 
-        // Save areas configuration last
         if (areaManager != null) {
             areaManager.saveAreas();
         }
@@ -85,5 +89,9 @@ public class XMobGeneration extends JavaPlugin {
 
     public GUIManager getGUIManager() {
         return guiManager;
+    }
+
+    public MythicMobsManager getMythicMobsManager() {
+        return mythicMobsManager;
     }
 }

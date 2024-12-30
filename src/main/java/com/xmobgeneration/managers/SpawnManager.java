@@ -40,6 +40,63 @@ public class SpawnManager {
         respawnTask.runTaskTimer(plugin, 20L, 20L);
     }
 
+    private Entity spawnEntity(Location location, SpawnArea area) {
+        Entity entity;
+        
+        if (area.isMythicMob()) {
+            // Spawn MythicMob
+            entity = plugin.getMythicMobsManager().spawnMythicMob(
+                area.getMythicMobType(), 
+                location,
+                area.getMobStats().getLevel()
+            );
+            
+            if (entity == null) {
+                plugin.getLogger().warning("Failed to spawn MythicMob: " + area.getMythicMobType());
+                return null;
+            }
+        } else {
+            // Spawn vanilla mob
+            entity = location.getWorld().spawnEntity(location, area.getMobType());
+        }
+
+        if (entity instanceof LivingEntity) {
+            LivingEntity livingEntity = (LivingEntity) entity;
+            MobStats stats = area.getMobStats();
+            
+            // Only apply custom stats if not a MythicMob (they handle their own stats)
+            if (!area.isMythicMob()) {
+                if (stats.isShowName()) {
+                    livingEntity.setCustomName(stats.getDisplayName());
+                    livingEntity.setCustomNameVisible(true);
+                }
+                
+                livingEntity.setMaxHealth(stats.getHealth());
+                livingEntity.setHealth(stats.getHealth());
+                livingEntity.setMetadata("mobDamage", new FixedMetadataValue(plugin, stats.getDamage()));
+
+                // Apply equipment only for vanilla mobs
+                EntityEquipment equipment = livingEntity.getEquipment();
+                if (equipment != null) {
+                    MobEquipment mobEquipment = area.getMobEquipment();
+                    equipment.setHelmet(mobEquipment.getHelmet());
+                    equipment.setChestplate(mobEquipment.getChestplate());
+                    equipment.setLeggings(mobEquipment.getLeggings());
+                    equipment.setBoots(mobEquipment.getBoots());
+                    equipment.setItemInOffHand(mobEquipment.getOffHand());
+
+                    equipment.setHelmetDropChance(0);
+                    equipment.setChestplateDropChance(0);
+                    equipment.setLeggingsDropChance(0);
+                    equipment.setBootsDropChance(0);
+                    equipment.setItemInOffHandDropChance(0);
+                }
+            }
+        }
+        
+        return entity;
+    }
+
     public void startSpawning(SpawnArea area) {
         // Stop any existing spawn tasks first
         stopSpawning(area.getName());
@@ -86,43 +143,6 @@ public class SpawnManager {
 
         plugin.getLogger().info(String.format("Initial spawn complete - Spawned %d/%d mobs in area %s", 
             spawned, neededMobs, area.getName()));
-    }
-
-    private Entity spawnEntity(Location location, SpawnArea area) {
-        Entity entity = location.getWorld().spawnEntity(location, area.getMobType());
-        if (entity instanceof LivingEntity) {
-            LivingEntity livingEntity = (LivingEntity) entity;
-            MobStats stats = area.getMobStats();
-            
-            // Apply stats
-            if (stats.isShowName()) {
-                livingEntity.setCustomName(stats.getDisplayName());
-                livingEntity.setCustomNameVisible(true);
-            }
-            
-            livingEntity.setMaxHealth(stats.getHealth());
-            livingEntity.setHealth(stats.getHealth());
-            livingEntity.setMetadata("mobDamage", new FixedMetadataValue(plugin, stats.getDamage()));
-
-            // Apply equipment
-            EntityEquipment equipment = livingEntity.getEquipment();
-            if (equipment != null) {
-                MobEquipment mobEquipment = area.getMobEquipment();
-                equipment.setHelmet(mobEquipment.getHelmet());
-                equipment.setChestplate(mobEquipment.getChestplate());
-                equipment.setLeggings(mobEquipment.getLeggings());
-                equipment.setBoots(mobEquipment.getBoots());
-                equipment.setItemInOffHand(mobEquipment.getOffHand());
-
-                // Prevent equipment drops
-                equipment.setHelmetDropChance(0);
-                equipment.setChestplateDropChance(0);
-                equipment.setLeggingsDropChance(0);
-                equipment.setBootsDropChance(0);
-                equipment.setItemInOffHandDropChance(0);
-            }
-        }
-        return entity;
     }
 
     public void handleMobDeath(Entity entity) {

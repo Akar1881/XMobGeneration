@@ -27,6 +27,7 @@ com\xmobgeneration\commands\CommandManager.class
 com\xmobgeneration\commands\SubCommand.class
 com\xmobgeneration\listeners\CustomDropsListener.class
 com\xmobgeneration\listeners\MobSpawnListener.class
+com\xmobgeneration\mythicmobs\MythicMobsManager.class
 com\xmobgeneration\utils\MessageUtils.class
 com\xmobgeneration\managers\spawn\LocationFinder.class
 com\xmobgeneration\XMobGeneration.class

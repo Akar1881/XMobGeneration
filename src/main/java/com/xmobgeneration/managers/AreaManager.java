@@ -86,7 +86,16 @@ public class AreaManager {
             if (pos1 == null || pos2 == null) continue;
 
             SpawnArea area = new SpawnArea(name, pos1, pos2);
-            area.setMobType(EntityType.valueOf(areaSection.getString("mobType", "ZOMBIE")));
+            
+            // Load mob type (either vanilla or MythicMob)
+            if (areaSection.getBoolean("isMythicMob", false)) {
+                area.setMythicMob(true);
+                area.setMythicMobType(areaSection.getString("mythicMobType", ""));
+            } else {
+                area.setMythicMob(false);
+                area.setMobType(EntityType.valueOf(areaSection.getString("mobType", "ZOMBIE")));
+            }
+
             area.setSpawnCount(areaSection.getInt("spawnCount", 5));
             area.setRespawnDelay(areaSection.getInt("respawnDelay", 30));
             area.setEnabled(areaSection.getBoolean("enabled", true));
@@ -155,7 +164,15 @@ public class AreaManager {
             
             areaSection.set("pos1", LocationSerializer.serialize(area.getPos1()));
             areaSection.set("pos2", LocationSerializer.serialize(area.getPos2()));
-            areaSection.set("mobType", area.getMobType().name());
+            
+            // Save mob type (either vanilla or MythicMob)
+            areaSection.set("isMythicMob", area.isMythicMob());
+            if (area.isMythicMob()) {
+                areaSection.set("mythicMobType", area.getMythicMobType());
+            } else {
+                areaSection.set("mobType", area.getMobType().name());
+            }
+
             areaSection.set("spawnCount", area.getSpawnCount());
             areaSection.set("respawnDelay", area.getRespawnDelay());
             areaSection.set("enabled", area.isEnabled());

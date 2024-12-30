@@ -28,30 +28,59 @@ public class ConfigAreaCommand implements SubCommand {
             return true;
         }
 
+        String mobTypeStr = args[2];
+        int spawnCount;
+        int respawnDelay;
+
         try {
-            EntityType mobType = EntityType.valueOf(args[2].toUpperCase());
-            int spawnCount = Integer.parseInt(args[3]);
-            int respawnDelay = Integer.parseInt(args[4]);
+            spawnCount = Integer.parseInt(args[3]);
+            respawnDelay = Integer.parseInt(args[4]);
 
             if (spawnCount < 1 || respawnDelay < 1) {
                 player.sendMessage(plugin.getConfigManager().getMessage("invalid-numbers"));
                 return true;
             }
-
-            area.setMobType(mobType);
-            area.setSpawnCount(spawnCount);
-            area.setRespawnDelay(respawnDelay);
-
-            plugin.getAreaManager().saveAreas();
-            plugin.getSpawnManager().startSpawning(area);
-
-            player.sendMessage(plugin.getConfigManager().getMessage("area-configured")
-                .replace("%name%", areaName));
-
-        } catch (IllegalArgumentException e) {
-            player.sendMessage(plugin.getConfigManager().getMessage("invalid-mob-type"));
+        } catch (NumberFormatException e) {
+            player.sendMessage(plugin.getConfigManager().getMessage("invalid-numbers"));
             return true;
         }
+
+        // Check if it's a MythicMob
+        if (mobTypeStr.toLowerCase().startsWith("mythic:")) {
+            String mythicMobType = mobTypeStr.substring(7); // Remove "mythic:" prefix
+            
+            if (!plugin.getMythicMobsManager().isMythicMobsEnabled()) {
+                player.sendMessage(plugin.getConfigManager().getMessage("mythicmobs-not-installed"));
+                return true;
+            }
+            
+            if (!plugin.getMythicMobsManager().isMythicMob(mythicMobType)) {
+                player.sendMessage(plugin.getConfigManager().getMessage("invalid-mythicmob-type"));
+                return true;
+            }
+            
+            area.setMythicMob(true);
+            area.setMythicMobType(mythicMobType);
+        } else {
+            // Handle vanilla mob type
+            try {
+                EntityType mobType = EntityType.valueOf(mobTypeStr.toUpperCase());
+                area.setMythicMob(false);
+                area.setMobType(mobType);
+            } catch (IllegalArgumentException e) {
+                player.sendMessage(plugin.getConfigManager().getMessage("invalid-mob-type"));
+                return true;
+            }
+        }
+
+        area.setSpawnCount(spawnCount);
+        area.setRespawnDelay(respawnDelay);
+
+        plugin.getAreaManager().saveAreas();
+        plugin.getSpawnManager().startSpawning(area);
+
+        player.sendMessage(plugin.getConfigManager().getMessage("area-configured")
+            .replace("%name%", areaName));
 
         return true;
     }

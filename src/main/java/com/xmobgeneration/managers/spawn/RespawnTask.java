@@ -41,14 +41,30 @@ public class RespawnTask extends BukkitRunnable {
 
     private void respawnMob(SpawnedMob mob, SpawnArea area) {
         Location spawnLoc = locationFinder.findSafeSpawnLocation(area);
-        if (spawnLoc != null) {
-            // Remove old mob data
-            mobTracker.removeTrackedMob(mob);
+        if (spawnLoc == null) return;
+
+        // Remove old mob data
+        mobTracker.removeTrackedMob(mob);
+        
+        Entity entity;
+        
+        if (area.isMythicMob()) {
+            // Spawn MythicMob
+            entity = plugin.getMythicMobsManager().spawnMythicMob(
+                area.getMythicMobType(), 
+                spawnLoc,
+                area.getMobStats().getLevel()
+            );
             
-            // Spawn new mob
-            Entity entity = spawnLoc.getWorld().spawnEntity(spawnLoc, area.getMobType());
+            if (entity == null) {
+                plugin.getLogger().warning("Failed to respawn MythicMob: " + area.getMythicMobType());
+                return;
+            }
+        } else {
+            // Spawn vanilla mob
+            entity = spawnLoc.getWorld().spawnEntity(spawnLoc, area.getMobType());
             
-            // Apply mob stats and equipment if it's a living entity
+            // Apply vanilla mob customizations
             if (entity instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) entity;
                 
@@ -70,14 +86,13 @@ public class RespawnTask extends BukkitRunnable {
                 if (equipment != null) {
                     MobEquipment mobEquipment = area.getMobEquipment();
                     
-                    // Set all equipment pieces
                     equipment.setHelmet(mobEquipment.getHelmet());
                     equipment.setChestplate(mobEquipment.getChestplate());
                     equipment.setLeggings(mobEquipment.getLeggings());
                     equipment.setBoots(mobEquipment.getBoots());
                     equipment.setItemInOffHand(mobEquipment.getOffHand());
 
-                    // Set drop chances to 0 to prevent equipment loss
+                    // Set drop chances to 0
                     equipment.setHelmetDropChance(0);
                     equipment.setChestplateDropChance(0);
                     equipment.setLeggingsDropChance(0);
@@ -85,13 +100,18 @@ public class RespawnTask extends BukkitRunnable {
                     equipment.setItemInOffHandDropChance(0);
                 }
             }
-            
-            // Track the new mob
-            mobTracker.trackMob(entity, area.getName(), spawnLoc);
-            
-            plugin.getLogger().info("Respawned mob in area: " + area.getName() + " at " + 
-                String.format("(%.1f, %.1f, %.1f)", 
-                    spawnLoc.getX(), spawnLoc.getY(), spawnLoc.getZ()));
         }
+        
+        // Track the new mob
+        mobTracker.trackMob(entity, area.getName(), spawnLoc);
+        
+        plugin.getLogger().info(String.format(
+            "Respawned %s in area: %s at (%.1f, %.1f, %.1f)",
+            area.isMythicMob() ? "MythicMob " + area.getMythicMobType() : area.getMobType().toString(),
+            area.getName(),
+            spawnLoc.getX(),
+            spawnLoc.getY(),
+            spawnLoc.getZ()
+        ));
     }
 }

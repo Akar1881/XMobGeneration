@@ -8,6 +8,8 @@ public class SpawnArea {
     private Location pos1;
     private Location pos2;
     private EntityType mobType;
+    private String mythicMobType; // Add this field
+    private boolean isMythicMob; // Add this field
     private int spawnCount;
     private int respawnDelay;
     private boolean enabled;
@@ -20,6 +22,8 @@ public class SpawnArea {
         this.pos1 = pos1;
         this.pos2 = pos2;
         this.mobType = EntityType.ZOMBIE;
+        this.mythicMobType = "";
+        this.isMythicMob = false;
         this.spawnCount = 5;
         this.respawnDelay = 30;
         this.enabled = true;
@@ -28,6 +32,24 @@ public class SpawnArea {
         this.mobEquipment = new MobEquipment();
     }
 
+    // Add getters and setters for new fields
+    public String getMythicMobType() {
+        return mythicMobType;
+    }
+
+    public void setMythicMobType(String mythicMobType) {
+        this.mythicMobType = mythicMobType;
+    }
+
+    public boolean isMythicMob() {
+        return isMythicMob;
+    }
+
+    public void setMythicMob(boolean mythicMob) {
+        isMythicMob = mythicMob;
+    }
+
+    // Existing getters and setters remain unchanged
     public String getName() {
         return name;
     }
