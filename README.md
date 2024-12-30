@@ -14,6 +14,11 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
   - Custom mob names with level display
   - Configurable health and damage
   - Level system with visual indicators
+- Custom mob equipment system
+  - Configure armor and off-hand items
+  - Persistent equipment per area
+  - Equipment preserved through respawns and server restarts
+  - Easy equipment management through GUI
 - Automatic area restart system
 - Persistent data storage
 
@@ -28,6 +33,7 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
 2. Place the JAR file in your server's `plugins` folder
 3. Restart your server
 4. The plugin will generate default configuration files
+5. You can download latest release on github releases.
 
 ## Commands
 

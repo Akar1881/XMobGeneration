@@ -2,6 +2,7 @@ package com.xmobgeneration.gui;
 
 import com.xmobgeneration.XMobGeneration;
 import com.xmobgeneration.gui.menus.CustomDropsMenu;
+import com.xmobgeneration.gui.menus.CustomMobEquipmentMenu;
 import com.xmobgeneration.gui.menus.MobStatsMenu;
 import com.xmobgeneration.models.SpawnArea;
 import org.bukkit.Bukkit;
@@ -19,9 +20,11 @@ import java.util.Map;
 public class GUIManager {
     private final XMobGeneration plugin;
     private static final int GUI_SIZE = 54;
+    private final CustomDropsMenu customDropsMenu;
 
     public GUIManager(XMobGeneration plugin) {
         this.plugin = plugin;
+        this.customDropsMenu = new CustomDropsMenu(plugin);
     }
 
     public void openMainGUI(Player player) {
@@ -107,6 +110,16 @@ public class GUIManager {
         mobStats.setItemMeta(mobStatsMeta);
         gui.setItem(33, mobStats);
 
+        // Add Equipment Button
+        ItemStack equipmentButton = new ItemStack(Material.DIAMOND_HELMET);
+        ItemMeta equipmentMeta = equipmentButton.getItemMeta();
+        equipmentMeta.setDisplayName("§eMob Equipment");
+        List<String> equipmentLore = new ArrayList<>();
+        equipmentLore.add("§7Click to configure mob equipment");
+        equipmentMeta.setLore(equipmentLore);
+        equipmentButton.setItemMeta(equipmentMeta);
+        gui.setItem(35, equipmentButton);
+
         // Toggle Spawning
         ItemStack toggleButton = new ItemStack(area.isEnabled() ? Material.LIME_DYE : Material.GRAY_DYE);
         ItemMeta toggleMeta = toggleButton.getItemMeta();
@@ -118,8 +131,16 @@ public class GUIManager {
         player.openInventory(gui);
     }
 
+    public void openCustomMobEquipmentMenu(Player player, SpawnArea area) {
+        new CustomMobEquipmentMenu(plugin).openMenu(player, area);
+    }
+
     public void openCustomDropsMenu(Player player, SpawnArea area) {
-        new CustomDropsMenu(plugin).openMenu(player, area);
+        customDropsMenu.openMenu(player, area);
+    }
+
+    public CustomDropsMenu getCustomDropsMenu() {
+        return customDropsMenu;
     }
 
     public void openMobStatsMenu(Player player, SpawnArea area) {

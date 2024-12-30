@@ -2,6 +2,8 @@ package com.xmobgeneration.listeners;
 
 import com.xmobgeneration.XMobGeneration;
 import com.xmobgeneration.models.SpawnArea;
+
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -61,6 +63,8 @@ public class GUIListener implements Listener {
             handleAreaEdit(player, clicked, title);
         } else if (title.startsWith("§8Custom Drops - ")) {
             handleCustomDrops(event, title);
+        } else if (title.startsWith("§8Mob Equipment - ")) {
+            handleMobEquipment(event);
         }
     }
 
@@ -72,14 +76,76 @@ public class GUIListener implements Listener {
             SpawnArea area = plugin.getAreaManager().getArea(areaName);
             if (area != null) {
                 List<ItemStack> items = new ArrayList<>();
+                List<Double> chances = new ArrayList<>();
+                
+                // Collect items and set default chances
                 for (int i = 0; i < 45; i++) {
                     ItemStack item = event.getInventory().getItem(i);
                     if (item != null) {
                         items.add(item.clone());
+                        chances.add(100.0); // Default 100% chance
                     }
                 }
-                area.getCustomDrops().setItems(items);
+                
+                area.getCustomDrops().setItems(items, chances);
                 plugin.getAreaManager().saveAreas();
+            }
+        }
+    }
+
+    private void handleMobEquipment(InventoryClickEvent event) {
+        String areaName = event.getView().getTitle().substring("§8Mob Equipment - ".length());
+        SpawnArea area = plugin.getAreaManager().getArea(areaName);
+        
+        if (area == null) return;
+
+        int slot = event.getRawSlot();
+        ItemStack clicked = event.getCurrentItem();
+        ItemStack cursor = event.getCursor();
+
+        if (slot >= 0 && slot <= 4) {
+            event.setCancelled(true);
+
+            if (cursor != null && cursor.getType() != Material.AIR) {
+                boolean validItem = false;
+                switch (slot) {
+                    case 0: // Helmet
+                        validItem = isHelmet(cursor.getType());
+                        if (validItem) area.getMobEquipment().setHelmet(cursor.clone());
+                        break;
+                    case 1: // Chestplate
+                        validItem = isChestplate(cursor.getType());
+                        if (validItem) area.getMobEquipment().setChestplate(cursor.clone());
+                        break;
+                    case 2: // Leggings
+                        validItem = isLeggings(cursor.getType());
+                        if (validItem) area.getMobEquipment().setLeggings(cursor.clone());
+                        break;
+                    case 3: // Boots
+                        validItem = isBoots(cursor.getType());
+                        if (validItem) area.getMobEquipment().setBoots(cursor.clone());
+                        break;
+                    case 4: // Off-hand item
+                        area.getMobEquipment().setOffHand(cursor.clone());
+                        validItem = true;
+                        break;
+                }
+
+                if (validItem) {
+                    plugin.getAreaManager().saveAreas();
+                    plugin.getGUIManager().openCustomMobEquipmentMenu((Player) event.getWhoClicked(), area);
+                }
+            } else if (clicked != null && clicked.getType() != Material.ARMOR_STAND) {
+                // Remove equipment
+                switch (slot) {
+                    case 0: area.getMobEquipment().setHelmet(null); break;
+                    case 1: area.getMobEquipment().setChestplate(null); break;
+                    case 2: area.getMobEquipment().setLeggings(null); break;
+                    case 3: area.getMobEquipment().setBoots(null); break;
+                    case 4: area.getMobEquipment().setOffHand(null); break;
+                }
+                plugin.getAreaManager().saveAreas();
+                plugin.getGUIManager().openCustomMobEquipmentMenu((Player) event.getWhoClicked(), area);
             }
         }
     }
@@ -156,6 +222,15 @@ public class GUIListener implements Listener {
         if (area == null) return;
 
         switch (clicked.getType()) {
+            case DIAMOND_HELMET:
+                plugin.getGUIManager().openCustomMobEquipmentMenu(player, area);
+                break;
+            case CHEST:
+                plugin.getGUIManager().openCustomDropsMenu(player, area);
+                break;
+            case CRAFTING_TABLE:
+                plugin.getGUIManager().openMobStatsMenu(player, area);
+                break;
             case LIME_DYE:
             case GRAY_DYE:
                 boolean enabled = plugin.getSpawnManager().toggleSpawning(area);
@@ -164,9 +239,22 @@ public class GUIListener implements Listener {
                 plugin.getAreaManager().saveAreas();
                 plugin.getGUIManager().openAreaEditGUI(player, area);
                 break;
-            case CHEST:
-                plugin.getGUIManager().openCustomDropsMenu(player, area);
-                break;
         }
+    }
+
+    private boolean isHelmet(Material material) {
+        return material.name().endsWith("_HELMET");
+    }
+
+    private boolean isChestplate(Material material) {
+        return material.name().endsWith("_CHESTPLATE");
+    }
+
+    private boolean isLeggings(Material material) {
+        return material.name().endsWith("_LEGGINGS");
+    }
+
+    private boolean isBoots(Material material) {
+        return material.name().endsWith("_BOOTS");
     }
 }

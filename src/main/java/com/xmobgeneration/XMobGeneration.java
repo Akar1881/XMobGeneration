@@ -21,7 +21,7 @@ public class XMobGeneration extends JavaPlugin {
     public void onEnable() {
         instance = this;
         
-        // Initialize managers
+        // Initialize managers in correct order
         this.configManager = new ConfigManager(this);
         this.spawnManager = new SpawnManager(this);
         this.areaManager = new AreaManager(this);
@@ -35,6 +35,11 @@ public class XMobGeneration extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CustomDropsListener(this), this);
         getServer().getPluginManager().registerEvents(new MobDamageListener(this), this);
         getServer().getPluginManager().registerEvents(new MobContainmentListener(this), this);
+
+        // Initialize spawning after all areas are loaded
+        getServer().getScheduler().runTaskLater(this, () -> {
+            areaManager.initializeSpawning();
+        }, 20L); // Wait 1 second to ensure everything is loaded
 
         getLogger().info("XMobGeneration has been enabled!");
     }

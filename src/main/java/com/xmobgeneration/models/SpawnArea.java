@@ -13,6 +13,7 @@ public class SpawnArea {
     private boolean enabled;
     private CustomDrops customDrops;
     private MobStats mobStats;
+    private MobEquipment mobEquipment;
 
     public SpawnArea(String name, Location pos1, Location pos2) {
         this.name = name;
@@ -24,6 +25,7 @@ public class SpawnArea {
         this.enabled = true;
         this.customDrops = new CustomDrops();
         this.mobStats = new MobStats();
+        this.mobEquipment = new MobEquipment();
     }
 
     public String getName() {
@@ -96,5 +98,13 @@ public class SpawnArea {
 
     public void setMobStats(MobStats mobStats) {
         this.mobStats = mobStats;
+    }
+
+    public MobEquipment getMobEquipment() {
+        return mobEquipment;
+    }
+
+    public void setMobEquipment(MobEquipment mobEquipment) {
+        this.mobEquipment = mobEquipment;
     }
 }

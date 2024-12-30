@@ -5,11 +5,13 @@ import com.xmobgeneration.managers.spawn.LocationFinder;
 import com.xmobgeneration.managers.spawn.MobTracker;
 import com.xmobgeneration.managers.spawn.RespawnTask;
 import com.xmobgeneration.models.SpawnArea;
+import com.xmobgeneration.models.MobEquipment;
 import com.xmobgeneration.models.MobStats;
 import com.xmobgeneration.models.SpawnedMob;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -39,21 +41,24 @@ public class SpawnManager {
     }
 
     public void startSpawning(SpawnArea area) {
+        // Stop any existing spawn tasks first
         stopSpawning(area.getName());
         
         if (!area.isEnabled()) {
             return;
         }
-
-        // Check if area already has the correct number of mobs
+    
+        // Clear any existing mobs for this area
+        mobTracker.despawnAreaMobs(area.getName());
+    
+        // Check current mob count
         int currentMobs = mobTracker.getAreaMobCount(area.getName());
-        if (currentMobs >= area.getSpawnCount()) {
-            plugin.getLogger().info("Area " + area.getName() + " already has " + currentMobs + " mobs");
-            return;
+        
+        // Only spawn if we have fewer mobs than desired
+        if (currentMobs < area.getSpawnCount()) {
+            plugin.getLogger().info("Starting initial spawn for area: " + area.getName());
+            performInitialSpawn(area);
         }
-
-        plugin.getLogger().info("Starting initial spawn for area: " + area.getName());
-        performInitialSpawn(area);
     }
 
     private void performInitialSpawn(SpawnArea area) {
@@ -89,6 +94,7 @@ public class SpawnManager {
             LivingEntity livingEntity = (LivingEntity) entity;
             MobStats stats = area.getMobStats();
             
+            // Apply stats
             if (stats.isShowName()) {
                 livingEntity.setCustomName(stats.getDisplayName());
                 livingEntity.setCustomNameVisible(true);
@@ -97,6 +103,24 @@ public class SpawnManager {
             livingEntity.setMaxHealth(stats.getHealth());
             livingEntity.setHealth(stats.getHealth());
             livingEntity.setMetadata("mobDamage", new FixedMetadataValue(plugin, stats.getDamage()));
+
+            // Apply equipment
+            EntityEquipment equipment = livingEntity.getEquipment();
+            if (equipment != null) {
+                MobEquipment mobEquipment = area.getMobEquipment();
+                equipment.setHelmet(mobEquipment.getHelmet());
+                equipment.setChestplate(mobEquipment.getChestplate());
+                equipment.setLeggings(mobEquipment.getLeggings());
+                equipment.setBoots(mobEquipment.getBoots());
+                equipment.setItemInOffHand(mobEquipment.getOffHand());
+
+                // Prevent equipment drops
+                equipment.setHelmetDropChance(0);
+                equipment.setChestplateDropChance(0);
+                equipment.setLeggingsDropChance(0);
+                equipment.setBootsDropChance(0);
+                equipment.setItemInOffHandDropChance(0);
+            }
         }
         return entity;
     }

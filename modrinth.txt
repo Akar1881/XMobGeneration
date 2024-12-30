@@ -8,6 +8,7 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • WorldEdit integration for simple area selection
 • Custom drops system with drag-and-drop interface
 • Advanced mob configuration with custom names and stats
+• Custom mob equipment system with GUI interface
 • Automatic area restart system
 
 🛠️ Mob Customization:
@@ -16,12 +17,20 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • Level system with visual indicators
 • Hologram display showing level, name, and health
 • Per-area mob statistics
+• Customizable equipment loadouts
 
 💎 Custom Drops:
 • GUI-based drop management
 • Enable/disable per area
 • Drag-and-drop item configuration
 • Automatic saving system
+
+⚔️ Equipment System:
+• Configure armor and off-hand items
+• Persistent equipment per spawn area
+• Equipment preserved through respawns and server restarts
+• Visual equipment slot indicators
+• Easy equipment management through GUI
 
 ⚙️ Technical Features:
 • Efficient spawn management

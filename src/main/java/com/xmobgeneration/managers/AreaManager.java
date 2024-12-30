@@ -3,6 +3,7 @@ package com.xmobgeneration.managers;
 import com.xmobgeneration.XMobGeneration;
 import com.xmobgeneration.models.SpawnArea;
 import com.xmobgeneration.models.CustomDrops;
+import com.xmobgeneration.models.MobEquipment;
 import com.xmobgeneration.models.MobStats;
 import com.xmobgeneration.utils.LocationSerializer;
 import org.bukkit.Location;
@@ -98,8 +99,11 @@ public class AreaManager {
                 
                 @SuppressWarnings("unchecked")
                 List<ItemStack> items = (List<ItemStack>) customDropsSection.getList("items");
-                if (items != null) {
-                    customDrops.setItems(items);
+                @SuppressWarnings("unchecked")
+                List<Double> chances = (List<Double>) customDropsSection.getList("chances");
+                
+                if (items != null && chances != null) {
+                    customDrops.setItems(items, chances);
                 }
                 
                 area.setCustomDrops(customDrops);
@@ -117,7 +121,24 @@ public class AreaManager {
                 area.setMobStats(mobStats);
             }
 
+            // Load equipment
+            ConfigurationSection equipmentSection = areaSection.getConfigurationSection("equipment");
+            if (equipmentSection != null) {
+                MobEquipment equipment = new MobEquipment();
+                equipment.setHelmet((ItemStack) equipmentSection.get("helmet"));
+                equipment.setChestplate((ItemStack) equipmentSection.get("chestplate"));
+                equipment.setLeggings((ItemStack) equipmentSection.get("leggings"));
+                equipment.setBoots((ItemStack) equipmentSection.get("boots"));
+                equipment.setOffHand((ItemStack) equipmentSection.get("offHand"));
+                area.setMobEquipment(equipment);
+            }
+
             spawnAreas.put(name, area);
+        }
+    }
+
+    public void initializeSpawning() {
+        for (SpawnArea area : spawnAreas.values()) {
             if (area.isEnabled()) {
                 plugin.getSpawnManager().startSpawning(area);
             }
@@ -144,6 +165,7 @@ public class AreaManager {
             CustomDrops customDrops = area.getCustomDrops();
             customDropsSection.set("enabled", customDrops.isEnabled());
             customDropsSection.set("items", customDrops.getItems());
+            customDropsSection.set("chances", customDrops.getChances());
 
             // Save mob stats
             ConfigurationSection mobStatsSection = areaSection.createSection("mobStats");
@@ -153,6 +175,15 @@ public class AreaManager {
             mobStatsSection.set("damage", mobStats.getDamage());
             mobStatsSection.set("level", mobStats.getLevel());
             mobStatsSection.set("showName", mobStats.isShowName());
+
+            // Save equipment
+            ConfigurationSection equipmentSection = areaSection.createSection("equipment");
+            MobEquipment equipment = area.getMobEquipment();
+            equipmentSection.set("helmet", equipment.getHelmet());
+            equipmentSection.set("chestplate", equipment.getChestplate());
+            equipmentSection.set("leggings", equipment.getLeggings());
+            equipmentSection.set("boots", equipment.getBoots());
+            equipmentSection.set("offHand", equipment.getOffHand());
         }
 
         try {

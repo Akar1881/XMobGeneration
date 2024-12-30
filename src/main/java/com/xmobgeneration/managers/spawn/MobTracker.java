@@ -48,11 +48,16 @@ public class MobTracker {
         Set<SpawnedMob> areaMobs = areaSpawnedMobs.remove(areaName);
         if (areaMobs != null) {
             for (SpawnedMob mob : areaMobs) {
+                Entity entity = mob.getEntity();
+                if (entity != null && !entity.isDead()) {
+                    entity.remove();
+                }
                 trackedMobs.remove(mob.getEntityId());
             }
         }
     }
-
+    
+    // Update despawnAreaMobs to ensure complete cleanup
     public void despawnAreaMobs(String areaName) {
         Set<SpawnedMob> areaMobs = areaSpawnedMobs.get(areaName);
         if (areaMobs != null) {
@@ -63,6 +68,7 @@ public class MobTracker {
                 }
                 removeTrackedMob(mob);
             }
+            areaSpawnedMobs.remove(areaName);
         }
     }
 

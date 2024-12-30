@@ -9,8 +9,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
+import java.util.Random;
+
 public class CustomDropsListener implements Listener {
     private final XMobGeneration plugin;
+    private final Random random = new Random();
 
     public CustomDropsListener(XMobGeneration plugin) {
         this.plugin = plugin;
@@ -24,10 +28,19 @@ public class CustomDropsListener implements Listener {
         if (spawnedMob != null) {
             SpawnArea area = plugin.getAreaManager().getArea(spawnedMob.getAreaName());
             if (area != null && area.getCustomDrops().isEnabled()) {
-                // Clear default drops and add custom drops
+                // Clear default drops
                 event.getDrops().clear();
-                for (ItemStack item : area.getCustomDrops().getItems()) {
-                    event.getDrops().add(item.clone());
+                
+                // Get items and their chances
+                List<ItemStack> items = area.getCustomDrops().getItems();
+                List<Double> chances = area.getCustomDrops().getChances();
+                
+                // Process each item with its chance
+                for (int i = 0; i < items.size(); i++) {
+                    double chance = chances.get(i);
+                    if (random.nextDouble() * 100 <= chance) {
+                        event.getDrops().add(items.get(i).clone());
+                    }
                 }
             }
         }

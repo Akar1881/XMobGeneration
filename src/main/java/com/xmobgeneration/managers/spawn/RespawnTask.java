@@ -3,9 +3,11 @@ package com.xmobgeneration.managers.spawn;
 import com.xmobgeneration.XMobGeneration;
 import com.xmobgeneration.models.SpawnArea;
 import com.xmobgeneration.models.SpawnedMob;
+import com.xmobgeneration.models.MobEquipment;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -46,7 +48,7 @@ public class RespawnTask extends BukkitRunnable {
             // Spawn new mob
             Entity entity = spawnLoc.getWorld().spawnEntity(spawnLoc, area.getMobType());
             
-            // Apply mob stats if it's a living entity
+            // Apply mob stats and equipment if it's a living entity
             if (entity instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) entity;
                 
@@ -62,6 +64,26 @@ public class RespawnTask extends BukkitRunnable {
                 
                 // Set damage
                 livingEntity.setMetadata("mobDamage", new FixedMetadataValue(plugin, area.getMobStats().getDamage()));
+
+                // Apply equipment
+                EntityEquipment equipment = livingEntity.getEquipment();
+                if (equipment != null) {
+                    MobEquipment mobEquipment = area.getMobEquipment();
+                    
+                    // Set all equipment pieces
+                    equipment.setHelmet(mobEquipment.getHelmet());
+                    equipment.setChestplate(mobEquipment.getChestplate());
+                    equipment.setLeggings(mobEquipment.getLeggings());
+                    equipment.setBoots(mobEquipment.getBoots());
+                    equipment.setItemInOffHand(mobEquipment.getOffHand());
+
+                    // Set drop chances to 0 to prevent equipment loss
+                    equipment.setHelmetDropChance(0);
+                    equipment.setChestplateDropChance(0);
+                    equipment.setLeggingsDropChance(0);
+                    equipment.setBootsDropChance(0);
+                    equipment.setItemInOffHandDropChance(0);
+                }
             }
             
             // Track the new mob
