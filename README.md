@@ -25,6 +25,12 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
   - Persistent equipment per area
   - Equipment preserved through respawns and server restarts
   - Easy equipment management through GUI
+- Boss System
+  - Dedicated boss areas with single-boss control
+  - Thread-safe boss spawn management
+  - Automatic area clearing on boss death
+  - Configurable respawn delays
+  - Boss drop distribution based on damage contribution
 - Automatic area restart system
 - Persistent data storage
 
@@ -53,10 +59,14 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
 - `/xmg gui` - Open the GUI interface
 - `/xmg reload` - Reload configuration and restart all mob areas
 - `/xmg help` - Show help message
+- `/xmg getwand` - Get the boss spawn point wand
+- `/xmg configboss <name> <mobType|mythic:mobType> <respawnDelay>` - Configure a boss area
+- `/xmg bosslist` - List all boss areas
 
 ## Permissions
 
 - `xmg.admin` - Access to all XMobGeneration commands (default: op)
+- `xmg.boss` - Access to boss-related commands (default: op)
 
 ## Configuration
 
@@ -88,7 +98,7 @@ To use MythicMobs in your spawn areas:
 2. Use the format `mythic:mobtype` when configuring mob types
    Example: `/xmg config myarea mythic:CustomBoss 5 30`
 
-Note: Version 1.6.0 and above will work perfectly fine without MythicMobs installed. The plugin will only enable MythicMobs features when the dependency is present.
+Note: Version 1.7.0 and above will work perfectly fine without MythicMobs installed. The plugin will only enable MythicMobs features when the dependency is present.
 
 ## Support
 

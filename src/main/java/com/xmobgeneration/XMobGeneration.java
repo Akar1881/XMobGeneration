@@ -6,6 +6,7 @@ import com.xmobgeneration.gui.GUIManager;
 import com.xmobgeneration.listeners.*;
 import com.xmobgeneration.managers.AreaManager;
 import com.xmobgeneration.managers.SpawnManager;
+import com.xmobgeneration.models.BossDamageTracker;
 import com.xmobgeneration.managers.RestartManager;
 import com.xmobgeneration.mythicmobs.MythicMobsManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,6 +19,7 @@ public class XMobGeneration extends JavaPlugin {
     private GUIManager guiManager;
     private RestartManager restartManager;
     private MythicMobsManager mythicMobsManager;
+    private BossDamageTracker bossDamageTracker;
 
     @Override
     public void onEnable() {
@@ -30,6 +32,7 @@ public class XMobGeneration extends JavaPlugin {
         this.areaManager = new AreaManager(this);
         this.guiManager = new GUIManager(this);
         this.restartManager = new RestartManager(this);
+        this.bossDamageTracker = new BossDamageTracker();
 
         // Register commands and listeners
         getCommand("xmg").setExecutor(new CommandManager(this));
@@ -39,6 +42,8 @@ public class XMobGeneration extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MobDamageListener(this), this);
         getServer().getPluginManager().registerEvents(new CustomDropsMenuListener(this), this);
         getServer().getPluginManager().registerEvents(new MobContainmentListener(this), this);
+        getServer().getPluginManager().registerEvents(new BossWandListener(this), this);
+        getServer().getPluginManager().registerEvents(new BossDamageListener(this), this);
 
         // Initialize spawning after all areas are loaded
         getServer().getScheduler().runTaskLater(this, () -> {
@@ -73,6 +78,10 @@ public class XMobGeneration extends JavaPlugin {
 
     public static XMobGeneration getInstance() {
         return instance;
+    }
+
+    public BossDamageTracker getBossDamageTracker() {
+        return bossDamageTracker;
     }
 
     public ConfigManager getConfigManager() {

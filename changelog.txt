@@ -1,5 +1,23 @@
 # XMobGeneration Changelog
 
+## Version 1.7.0 (2025-01-01)
+
+### Fixed
+- Boss spawn system improvements:
+  - Fixed issue with duplicate boss spawns
+  - Added thread-safe coordination for boss spawning
+  - Improved boss death and respawn handling
+  - Better synchronization of boss area mob clearing
+  - Enhanced state management for boss tracking
+
+### Technical
+- Added ReentrantLock for thread-safe boss spawn handling
+- Improved validation in boss death processing
+- Enhanced coordination between mob clearing and boss respawning
+- Better state management for boss tracking and respawn tasks
+- Improved logging for boss spawn and death events
+
+
 ## Version 1.6.0 (2024-12-30)
 
 ### Added

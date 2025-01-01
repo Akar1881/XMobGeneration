@@ -96,6 +96,9 @@ public class AreaManager {
                 area.setMobType(EntityType.valueOf(areaSection.getString("mobType", "ZOMBIE")));
             }
 
+            area.setBossArea(areaSection.getBoolean("isBossArea", false));
+            area.setBossSpawnPoint(LocationSerializer.deserialize(areaSection.getString("bossSpawnPoint")));
+
             area.setSpawnCount(areaSection.getInt("spawnCount", 5));
             area.setRespawnDelay(areaSection.getInt("respawnDelay", 30));
             area.setEnabled(areaSection.getBoolean("enabled", true));
@@ -176,6 +179,9 @@ public class AreaManager {
             areaSection.set("spawnCount", area.getSpawnCount());
             areaSection.set("respawnDelay", area.getRespawnDelay());
             areaSection.set("enabled", area.isEnabled());
+
+            areaSection.set("isBossArea", area.isBossArea());
+            areaSection.set("bossSpawnPoint", LocationSerializer.serialize(area.getBossSpawnPoint()));
 
             // Save custom drops
             ConfigurationSection customDropsSection = areaSection.createSection("customDrops");

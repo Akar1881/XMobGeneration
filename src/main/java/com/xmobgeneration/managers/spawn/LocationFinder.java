@@ -31,7 +31,8 @@ public class LocationFinder {
             for (int y = minY; y <= maxY; y++) {
                 Location testLoc = new Location(world, x, y, z);
                 if (isValidSpawnLocation(testLoc)) {
-                    return testLoc.add(0.5, 0.1, 0.5);
+                    // Add 1.0 to Y coordinate to ensure entity spawns above the block
+                    return testLoc.add(0.5, 1.0, 0.5);
                 }
             }
         }
@@ -43,9 +44,11 @@ public class LocationFinder {
         Block block = location.getBlock();
         Block below = location.clone().subtract(0, 1, 0).getBlock();
         Block above = location.clone().add(0, 1, 0).getBlock();
+        Block twoAbove = location.clone().add(0, 2, 0).getBlock();
         
         return block.isEmpty() && 
                above.isEmpty() && 
+               twoAbove.isEmpty() && 
                below.getType().isSolid();
     }
 }

@@ -2,6 +2,8 @@ package com.xmobgeneration.commands.subcommands;
 
 import com.xmobgeneration.XMobGeneration;
 import com.xmobgeneration.commands.SubCommand;
+import com.xmobgeneration.utils.CommandHelper;
+import com.xmobgeneration.utils.CommandHelper.CommandInfo;
 import org.bukkit.entity.Player;
 
 public class HelpCommand implements SubCommand {
@@ -14,15 +16,37 @@ public class HelpCommand implements SubCommand {
     @Override
     public boolean execute(Player player, String[] args) {
         player.sendMessage("§6=== XMobGeneration Help ===");
-        player.sendMessage("§e/xmg create <name> §7- Create a new spawn area");
-        player.sendMessage("§e/xmg delete <name> §7- Delete a spawn area");
-        player.sendMessage("§e/xmg config <name> <mobType|mythic:mobType> <count> <delay> §7- Configure an area");
-        player.sendMessage("§e/xmg setmobnames <areaname> <mobsname> §7- Set Mobs Name in an area");
-        player.sendMessage("§e/xmg mobconfig <areaname> <mobHealth> <mobDamage> <mobLevel> §7- Configure Mobs in an area");
-        player.sendMessage("§e/xmg list §7- List all spawn areas");
-        player.sendMessage("§e/xmg gui §7- Open the GUI");
-        player.sendMessage("§e/xmg reload §7- Reload config and restart all mob areas");
-        player.sendMessage("§e/xmg help §7- Show this help message");
+        
+        // General Commands Section
+        player.sendMessage("§e§lGeneral Commands:");
+        for (CommandInfo cmd : CommandHelper.getCommands()) {
+            if (!cmd.getCommand().contains("boss") && !cmd.getCommand().contains("mob")) {
+                sendCommandHelp(player, cmd);
+            }
+        }
+        
+        // Mob Configuration Section
+        player.sendMessage("\n§e§lMob Configuration:");
+        for (CommandInfo cmd : CommandHelper.getCommands()) {
+            if (cmd.getCommand().contains("mob") || cmd.getCommand().equals("config")) {
+                sendCommandHelp(player, cmd);
+            }
+        }
+        
+        // Boss Commands Section
+        player.sendMessage("\n§e§lBoss Commands:");
+        for (CommandInfo cmd : CommandHelper.getCommands()) {
+            if (cmd.getCommand().contains("boss") || cmd.getCommand().equals("getwand")) {
+                sendCommandHelp(player, cmd);
+            }
+        }
+        
         return true;
+    }
+    
+    private void sendCommandHelp(Player player, CommandInfo cmd) {
+        String command = "/xmg " + cmd.getCommand();
+        String args = cmd.getArgs().isEmpty() ? "" : " " + cmd.getArgs();
+        player.sendMessage("§e" + command + "§7" + args + " §7- " + cmd.getDescription());
     }
 }

@@ -16,6 +16,8 @@ public class SpawnArea {
     private CustomDrops customDrops;
     private MobStats mobStats;
     private MobEquipment mobEquipment;
+    private boolean isBossArea;
+    private Location bossSpawnPoint;
 
     public SpawnArea(String name, Location pos1, Location pos2) {
         this.name = name;
@@ -128,5 +130,20 @@ public class SpawnArea {
 
     public void setMobEquipment(MobEquipment mobEquipment) {
         this.mobEquipment = mobEquipment;
+    }
+    public boolean isBossArea() {
+        return isBossArea;
+    }
+    
+    public void setBossArea(boolean bossArea) {
+        isBossArea = bossArea;
+    }
+    
+    public Location getBossSpawnPoint() {
+        return bossSpawnPoint;
+    }
+    
+    public void setBossSpawnPoint(Location bossSpawnPoint) {
+        this.bossSpawnPoint = bossSpawnPoint;
     }
 }

@@ -25,10 +25,15 @@ public class MobTracker {
     }
 
     public void removeTrackedMob(SpawnedMob mob) {
-        trackedMobs.remove(mob.getEntityId());
+        UUID entityId = mob.getEntityId();
+        trackedMobs.remove(entityId);
+        
         Set<SpawnedMob> areaMobs = areaSpawnedMobs.get(mob.getAreaName());
         if (areaMobs != null) {
             areaMobs.remove(mob);
+            if (areaMobs.isEmpty()) {
+                areaSpawnedMobs.remove(mob.getAreaName());
+            }
         }
     }
 
@@ -38,7 +43,6 @@ public class MobTracker {
             return 0;
         }
         
-        // Count only living mobs
         return (int) areaMobs.stream()
             .filter(mob -> !mob.isDead() && mob.getEntity() != null && !mob.getEntity().isDead())
             .count();
@@ -47,7 +51,7 @@ public class MobTracker {
     public void clearAreaMobs(String areaName) {
         Set<SpawnedMob> areaMobs = areaSpawnedMobs.remove(areaName);
         if (areaMobs != null) {
-            for (SpawnedMob mob : areaMobs) {
+            for (SpawnedMob mob : new HashSet<>(areaMobs)) {
                 Entity entity = mob.getEntity();
                 if (entity != null && !entity.isDead()) {
                     entity.remove();
@@ -56,11 +60,11 @@ public class MobTracker {
             }
         }
     }
-    
-    // Update despawnAreaMobs to ensure complete cleanup
+
     public void despawnAreaMobs(String areaName) {
         Set<SpawnedMob> areaMobs = areaSpawnedMobs.get(areaName);
         if (areaMobs != null) {
+            // Create a new HashSet to avoid ConcurrentModificationException
             for (SpawnedMob mob : new HashSet<>(areaMobs)) {
                 Entity entity = mob.getEntity();
                 if (entity != null && !entity.isDead()) {
@@ -68,12 +72,14 @@ public class MobTracker {
                 }
                 removeTrackedMob(mob);
             }
+            // Clear the area's mob set
             areaSpawnedMobs.remove(areaName);
         }
     }
 
     public List<SpawnedMob> getDeadMobsReadyToRespawn(long currentTime, int respawnDelay) {
         List<SpawnedMob> mobsToRespawn = new ArrayList<>();
+        
         for (Set<SpawnedMob> areaMobs : areaSpawnedMobs.values()) {
             for (SpawnedMob mob : areaMobs) {
                 if (mob.isDead()) {
@@ -84,6 +90,7 @@ public class MobTracker {
                 }
             }
         }
+        
         return mobsToRespawn;
     }
 

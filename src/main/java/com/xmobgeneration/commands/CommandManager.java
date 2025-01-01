@@ -32,6 +32,9 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         commands.put("setmobnames", new SetMobNamesCommand(plugin));
         commands.put("mobconfig", new MobConfigCommand(plugin));
         commands.put("reload", new ReloadCommand(plugin)); // Add reload command
+        commands.put("getwand", new GetWandCommand(plugin));
+        commands.put("configboss", new ConfigBossCommand(plugin));
+        commands.put("bosslist", new BossListCommand(plugin));
     }
 
     @Override

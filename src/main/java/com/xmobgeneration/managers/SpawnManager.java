@@ -1,12 +1,9 @@
 package com.xmobgeneration.managers;
 
 import com.xmobgeneration.XMobGeneration;
-import com.xmobgeneration.managers.spawn.LocationFinder;
-import com.xmobgeneration.managers.spawn.MobTracker;
-import com.xmobgeneration.managers.spawn.RespawnTask;
+import com.xmobgeneration.managers.spawn.*;
 import com.xmobgeneration.models.SpawnArea;
 import com.xmobgeneration.models.MobEquipment;
-import com.xmobgeneration.models.MobStats;
 import com.xmobgeneration.models.SpawnedMob;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -17,18 +14,21 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class SpawnManager {
     private final XMobGeneration plugin;
     private final Map<String, BukkitRunnable> spawnTasks = new HashMap<>();
     private final MobTracker mobTracker;
     private final LocationFinder locationFinder;
+    private final BossSpawnHandler bossSpawnHandler;
     private RespawnTask respawnTask;
 
     public SpawnManager(XMobGeneration plugin) {
         this.plugin = plugin;
         this.mobTracker = new MobTracker();
         this.locationFinder = new LocationFinder();
+        this.bossSpawnHandler = new BossSpawnHandler(plugin);
         startRespawnTask();
     }
 
@@ -40,11 +40,53 @@ public class SpawnManager {
         respawnTask.runTaskTimer(plugin, 20L, 20L);
     }
 
+    public void startSpawning(SpawnArea area) {
+        stopSpawning(area.getName());
+        
+        if (!area.isEnabled()) {
+            return;
+        }
+
+        mobTracker.despawnAreaMobs(area.getName());
+        
+        if (area.isBossArea()) {
+            bossSpawnHandler.removeBossTracking(area.getName());
+            if (area.isEnabled()) {
+                bossSpawnHandler.spawnBoss(area);
+            }
+        } else {
+            performInitialSpawn(area);
+        }
+    }
+
+    private void performInitialSpawn(SpawnArea area) {
+        if (area.isBossArea()) {
+            return;
+        }
+
+        int neededMobs = area.getSpawnCount();
+        int attempts = 0;
+        int maxAttempts = neededMobs * 3;
+        int spawned = 0;
+
+        while (spawned < neededMobs && attempts < maxAttempts) {
+            attempts++;
+            Location spawnLoc = locationFinder.findSafeSpawnLocation(area);
+            
+            if (spawnLoc != null) {
+                Entity entity = spawnEntity(spawnLoc, area);
+                if (entity != null) {
+                    mobTracker.trackMob(entity, area.getName(), spawnLoc);
+                    spawned++;
+                }
+            }
+        }
+    }
+
     private Entity spawnEntity(Location location, SpawnArea area) {
         Entity entity;
         
         if (area.isMythicMob()) {
-            // Spawn MythicMob
             entity = plugin.getMythicMobsManager().spawnMythicMob(
                 area.getMythicMobType(), 
                 location,
@@ -56,103 +98,70 @@ public class SpawnManager {
                 return null;
             }
         } else {
-            // Spawn vanilla mob
             entity = location.getWorld().spawnEntity(location, area.getMobType());
         }
 
         if (entity instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) entity;
-            MobStats stats = area.getMobStats();
             
-            // Only apply custom stats if not a MythicMob (they handle their own stats)
             if (!area.isMythicMob()) {
-                if (stats.isShowName()) {
-                    livingEntity.setCustomName(stats.getDisplayName());
+                if (area.getMobStats().isShowName()) {
+                    livingEntity.setCustomName(area.getMobStats().getDisplayName());
                     livingEntity.setCustomNameVisible(true);
                 }
                 
-                livingEntity.setMaxHealth(stats.getHealth());
-                livingEntity.setHealth(stats.getHealth());
-                livingEntity.setMetadata("mobDamage", new FixedMetadataValue(plugin, stats.getDamage()));
-
-                // Apply equipment only for vanilla mobs
-                EntityEquipment equipment = livingEntity.getEquipment();
-                if (equipment != null) {
-                    MobEquipment mobEquipment = area.getMobEquipment();
-                    equipment.setHelmet(mobEquipment.getHelmet());
-                    equipment.setChestplate(mobEquipment.getChestplate());
-                    equipment.setLeggings(mobEquipment.getLeggings());
-                    equipment.setBoots(mobEquipment.getBoots());
-                    equipment.setItemInOffHand(mobEquipment.getOffHand());
-
-                    equipment.setHelmetDropChance(0);
-                    equipment.setChestplateDropChance(0);
-                    equipment.setLeggingsDropChance(0);
-                    equipment.setBootsDropChance(0);
-                    equipment.setItemInOffHandDropChance(0);
-                }
+                livingEntity.setMaxHealth(area.getMobStats().getHealth());
+                livingEntity.setHealth(area.getMobStats().getHealth());
             }
+
+            livingEntity.setMetadata("mobDamage", new FixedMetadataValue(plugin, area.getMobStats().getDamage()));
+            applyEquipment(livingEntity, area.getMobEquipment());
         }
         
         return entity;
     }
 
-    public void startSpawning(SpawnArea area) {
-        // Stop any existing spawn tasks first
-        stopSpawning(area.getName());
-        
-        if (!area.isEnabled()) {
-            return;
-        }
-    
-        // Clear any existing mobs for this area
-        mobTracker.despawnAreaMobs(area.getName());
-    
-        // Check current mob count
-        int currentMobs = mobTracker.getAreaMobCount(area.getName());
-        
-        // Only spawn if we have fewer mobs than desired
-        if (currentMobs < area.getSpawnCount()) {
-            plugin.getLogger().info("Starting initial spawn for area: " + area.getName());
-            performInitialSpawn(area);
-        }
-    }
+    private void applyEquipment(LivingEntity entity, MobEquipment mobEquipment) {
+        EntityEquipment equipment = entity.getEquipment();
+        if (equipment != null) {
+            equipment.setHelmet(mobEquipment.getHelmet());
+            equipment.setChestplate(mobEquipment.getChestplate());
+            equipment.setLeggings(mobEquipment.getLeggings());
+            equipment.setBoots(mobEquipment.getBoots());
+            equipment.setItemInOffHand(mobEquipment.getOffHand());
 
-    private void performInitialSpawn(SpawnArea area) {
-        int currentMobs = mobTracker.getAreaMobCount(area.getName());
-        int neededMobs = area.getSpawnCount() - currentMobs;
-        
-        if (neededMobs <= 0) {
-            return;
+            equipment.setHelmetDropChance(0);
+            equipment.setChestplateDropChance(0);
+            equipment.setLeggingsDropChance(0);
+            equipment.setBootsDropChance(0);
+            equipment.setItemInOffHandDropChance(0);
         }
-
-        int attempts = 0;
-        int maxAttempts = neededMobs * 3;
-        int spawned = 0;
-
-        while (spawned < neededMobs && attempts < maxAttempts) {
-            attempts++;
-            Location spawnLoc = locationFinder.findSafeSpawnLocation(area);
-            
-            if (spawnLoc != null) {
-                Entity entity = spawnEntity(spawnLoc, area);
-                mobTracker.trackMob(entity, area.getName(), spawnLoc);
-                spawned++;
-            }
-        }
-
-        plugin.getLogger().info(String.format("Initial spawn complete - Spawned %d/%d mobs in area %s", 
-            spawned, neededMobs, area.getName()));
     }
 
     public void handleMobDeath(Entity entity) {
-        mobTracker.handleMobDeath(entity);
+        SpawnedMob mob = mobTracker.getMob(entity.getUniqueId());
+        if (mob != null) {
+            mobTracker.handleMobDeath(entity);
+            
+            if (entity.hasMetadata("isBoss")) {
+                String areaName = entity.getMetadata("areaName").get(0).asString();
+                bossSpawnHandler.handleBossDeath(areaName, entity.getUniqueId());
+            }
+        }
     }
 
     public void stopSpawning(String areaName) {
         BukkitRunnable task = spawnTasks.remove(areaName);
         if (task != null) {
             task.cancel();
+        }
+        bossSpawnHandler.cancelRespawnTask(areaName);
+    }
+
+    public void despawnBossAreaMobs(String areaName) {
+        SpawnArea area = plugin.getAreaManager().getArea(areaName);
+        if (area != null && area.isBossArea()) {
+            mobTracker.despawnAreaMobs(areaName);
         }
     }
 
@@ -164,17 +173,32 @@ public class SpawnManager {
         } else {
             stopSpawning(area.getName());
             mobTracker.despawnAreaMobs(area.getName());
+            if (area.isBossArea()) {
+                bossSpawnHandler.removeBossTracking(area.getName());
+            }
         }
         
         return area.isEnabled();
     }
 
     public void restartArea(SpawnArea area) {
+        stopSpawning(area.getName());
         mobTracker.despawnAreaMobs(area.getName());
-        startSpawning(area);
+        
+        if (area.isBossArea()) {
+            bossSpawnHandler.removeBossTracking(area.getName());
+        }
+        
+        if (area.isEnabled()) {
+            startSpawning(area);
+        }
     }
 
     public MobTracker getMobTracker() {
         return mobTracker;
+    }
+
+    public UUID getBossUUID(String areaName) {
+        return bossSpawnHandler.getBossUUID(areaName);
     }
 }
