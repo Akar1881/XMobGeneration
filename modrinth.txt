@@ -1,21 +1,33 @@
 XMobGeneration - Advanced Mob Spawn Area Manager
 
-A powerful and user-friendly Minecraft plugin that gives server administrators complete control over mob spawning with customizable areas, drops, and mob configurations.
+A powerful and user-friendly Minecraft plugin that gives server administrators complete control over mob spawning with customizable areas, drops, and mob configurations. Perfect for creating custom mob arenas, RPG zones, and boss battles.
 
 🎮 Key Features:
 • Create and manage up to 45 custom mob spawn areas
 • Intuitive GUI interface for easy management
 • WorldEdit integration for simple area selection
 • Support for both vanilla mobs and MythicMobs
-• Custom drops system with drag-and-drop interface
-  - Easy item management through GUI
-  - Configurable drop chances in areas.yml
-  - Default 100% drop chance for new items
-  - Persistent drop chances
-  - Clean item lore handling
-• Advanced mob configuration with custom names and stats
-• Custom mob equipment system with GUI interface
+• Thread-safe boss spawn management
 • Automatic area restart system
+
+⚔️ Boss System:
+• Dedicated boss areas with single-boss control
+• Thread-safe boss spawn management
+• Automatic area clearing on boss death
+• Configurable respawn delays
+• Boss drop distribution based on damage contribution
+• Damage leaderboard display
+• Special rewards for top damage dealers
+
+💎 Custom Drops System:
+• GUI-based drop management
+• Configurable drop chances
+• Tiered drop system for bosses:
+  - Rare drops (≤5% chance) - Higher chance for top 3 players
+  - Semi-rare drops (≤10% chance) - Distributed among top 5 players
+  - Common drops (≥90% chance) - Given to all participants
+• Persistent drop chances
+• Clean item lore handling
 
 🛠️ Mob Customization:
 • Custom names with level display
@@ -25,30 +37,23 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • Per-area mob statistics
 • Customizable equipment loadouts
 
-💎 Custom Drops:
-• GUI-based drop management
-• Enable/disable per area
-• Drag-and-drop item configuration
-• Configurable drop chances through areas.yml
-• Persistent drop chances
-• Clean item lore handling
-• Automatic saving system
-
 ⚔️ Equipment System:
-• Configure armor and off-hand items
+• Configure armor and weapons
+• GUI-based equipment management
 • Persistent equipment per spawn area
-• Equipment preserved through respawns and server restarts
+• Equipment preserved through respawns
 • Visual equipment slot indicators
-• Easy equipment management through GUI
+• Zero drop chance for equipped items
 
 🧙‍♂️ MythicMobs Integration:
 • Seamless integration with MythicMobs plugin
 • Spawn custom MythicMobs in your areas
-• Use 'mythic:mobtype' format for easy configuration
+• Use 'mythic:mobtype' format
 • Automatic level scaling support
-• Works perfectly without MythicMobs installed
+• Works without MythicMobs installed
 
 ⚙️ Technical Features:
+• Thread-safe boss spawn handling
 • Efficient spawn management
 • Configurable restart intervals
 • Persistent data storage
@@ -57,7 +62,7 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • Easy configuration reload
 
 📚 Documentation:
-Full documentation available in the README.md file, including:
+Full documentation available in the README.md file:
 • Installation guide
 • Command reference
 • Configuration options
@@ -73,7 +78,7 @@ Perfect for:
 • RPG servers
 • Custom mob arenas
 • Spawn area management
-• Mob farming setups
+• Boss battle systems
 • Custom server experiences
 
 Active development and support through GitHub issues tracker.
