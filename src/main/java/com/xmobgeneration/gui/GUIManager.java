@@ -84,6 +84,20 @@ public class GUIManager {
         respawnDelay.setItemMeta(respawnDelayMeta);
         gui.setItem(15, respawnDelay);
 
+        // Add XP Bottle item to show/edit XP amount
+    ItemStack xpBottle = new ItemStack(Material.EXPERIENCE_BOTTLE);
+    ItemMeta xpMeta = xpBottle.getItemMeta();
+    xpMeta.setDisplayName("§eXP Amount");
+    List<String> xpLore = new ArrayList<>();
+    xpLore.add("§7Current XP: §b" + area.getXpAmount());
+    xpLore.add("");
+    xpLore.add("§7Left-Click: §a+10 XP");
+    xpLore.add("§7Right-Click: §c-10 XP");
+    xpLore.add("§7Use /xmg xp [area] [amount] to set");
+    xpMeta.setLore(xpLore);
+    xpBottle.setItemMeta(xpMeta);
+    gui.setItem(29, xpBottle);
+
         // Custom Drops Button
         ItemStack customDrops = new ItemStack(Material.CHEST);
         ItemMeta customDropsMeta = customDrops.getItemMeta();

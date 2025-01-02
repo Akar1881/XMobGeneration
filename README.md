@@ -25,12 +25,19 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
   - Persistent equipment per area
   - Equipment preserved through respawns and server restarts
   - Easy equipment management through GUI
+- XP System
+  - Configurable XP rewards per area
+  - Regular mobs award XP directly to killer
+  - Boss XP distributed based on damage contribution
+  - Top damage dealers receive proportional XP share
 - Boss System
   - Dedicated boss areas with single-boss control
   - Thread-safe boss spawn management
   - Automatic area clearing on boss death
   - Configurable respawn delays
   - Boss drop distribution based on damage contribution
+  - Damage leaderboard display
+  - Special rewards for top damage dealers
 - Automatic area restart system
 - Persistent data storage
 
@@ -62,6 +69,7 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
 - `/xmg getwand` - Get the boss spawn point wand
 - `/xmg configboss <name> <mobType|mythic:mobType> <respawnDelay>` - Configure a boss area
 - `/xmg bosslist` - List all boss areas
+- `/xmg xp <area> <amount>` - Set XP reward for an area
 
 ## Permissions
 

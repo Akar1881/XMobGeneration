@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xmobgeneration</groupId>
     <artifactId>XMobGeneration</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
     <name>XMobGeneration</name>
     <description>A plugin for managing mob generation areas in Minecraft</description>
 

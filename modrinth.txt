@@ -29,6 +29,14 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • Persistent drop chances
 • Clean item lore handling
 
+🌟 XP System:
+• Configurable XP rewards per area
+• Direct XP rewards for regular mob kills
+• Proportional XP distribution for boss kills
+• XP based on damage contribution
+• Visual XP gain notifications
+• Easy XP configuration through GUI
+
 🛠️ Mob Customization:
 • Custom names with level display
 • Configurable health and damage

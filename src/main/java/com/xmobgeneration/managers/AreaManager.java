@@ -100,6 +100,7 @@ public class AreaManager {
             area.setBossSpawnPoint(LocationSerializer.deserialize(areaSection.getString("bossSpawnPoint")));
 
             area.setSpawnCount(areaSection.getInt("spawnCount", 5));
+            area.setXpAmount(areaSection.getInt("xpAmount", 10)); // Default 10 XP
             area.setRespawnDelay(areaSection.getInt("respawnDelay", 30));
             area.setEnabled(areaSection.getBoolean("enabled", true));
 
@@ -179,6 +180,7 @@ public class AreaManager {
             areaSection.set("spawnCount", area.getSpawnCount());
             areaSection.set("respawnDelay", area.getRespawnDelay());
             areaSection.set("enabled", area.isEnabled());
+            areaSection.set("xpAmount", area.getXpAmount());
 
             areaSection.set("isBossArea", area.isBossArea());
             areaSection.set("bossSpawnPoint", LocationSerializer.serialize(area.getBossSpawnPoint()));

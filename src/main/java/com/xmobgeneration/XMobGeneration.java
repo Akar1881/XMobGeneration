@@ -6,6 +6,7 @@ import com.xmobgeneration.gui.GUIManager;
 import com.xmobgeneration.listeners.*;
 import com.xmobgeneration.managers.AreaManager;
 import com.xmobgeneration.managers.SpawnManager;
+import com.xmobgeneration.managers.XPManager;
 import com.xmobgeneration.models.BossDamageTracker;
 import com.xmobgeneration.managers.RestartManager;
 import com.xmobgeneration.mythicmobs.MythicMobsManager;
@@ -20,6 +21,7 @@ public class XMobGeneration extends JavaPlugin {
     private RestartManager restartManager;
     private MythicMobsManager mythicMobsManager;
     private BossDamageTracker bossDamageTracker;
+    private XPManager xpManager;
 
     @Override
     public void onEnable() {
@@ -33,6 +35,7 @@ public class XMobGeneration extends JavaPlugin {
         this.guiManager = new GUIManager(this);
         this.restartManager = new RestartManager(this);
         this.bossDamageTracker = new BossDamageTracker();
+        this.xpManager = new XPManager(this);
 
         // Register commands and listeners
         getCommand("xmg").setExecutor(new CommandManager(this));
@@ -44,6 +47,7 @@ public class XMobGeneration extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MobContainmentListener(this), this);
         getServer().getPluginManager().registerEvents(new BossWandListener(this), this);
         getServer().getPluginManager().registerEvents(new BossDamageListener(this), this);
+        getServer().getPluginManager().registerEvents(new MobStatsMenuListener(this), this);
 
         // Initialize spawning after all areas are loaded
         getServer().getScheduler().runTaskLater(this, () -> {
@@ -86,6 +90,10 @@ public class XMobGeneration extends JavaPlugin {
 
     public ConfigManager getConfigManager() {
         return configManager;
+    }
+
+    public XPManager getXPManager() {
+        return xpManager;
     }
 
     public AreaManager getAreaManager() {

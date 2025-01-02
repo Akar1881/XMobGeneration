@@ -3,6 +3,7 @@ com\xmobgeneration\listeners\MobContainmentListener.class
 com\xmobgeneration\gui\menus\CustomDropsMenu.class
 com\xmobgeneration\utils\InventoryUtils.class
 com\xmobgeneration\commands\subcommands\CreateAreaCommand.class
+com\xmobgeneration\commands\subcommands\SetXPCommand.class
 com\xmobgeneration\models\SpawnArea.class
 com\xmobgeneration\gui\menus\CustomMobEquipmentMenu.class
 com\xmobgeneration\commands\subcommands\BossListCommand.class
@@ -38,8 +39,10 @@ com\xmobgeneration\listeners\MobSpawnListener.class
 com\xmobgeneration\mythicmobs\MythicMobsManager.class
 com\xmobgeneration\utils\MessageUtils.class
 com\xmobgeneration\managers\drops\DropUtil.class
+com\xmobgeneration\listeners\MobStatsMenuListener.class
 com\xmobgeneration\managers\spawn\LocationFinder.class
 com\xmobgeneration\managers\spawn\MobEquipmentApplier.class
+com\xmobgeneration\managers\XPManager.class
 com\xmobgeneration\listeners\BossDamageListener.class
 com\xmobgeneration\XMobGeneration.class
 com\xmobgeneration\managers\SpawnManager.class

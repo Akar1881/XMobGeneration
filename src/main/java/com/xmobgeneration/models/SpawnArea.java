@@ -18,6 +18,7 @@ public class SpawnArea {
     private MobEquipment mobEquipment;
     private boolean isBossArea;
     private Location bossSpawnPoint;
+    private int xpAmount = 10; // Default XP amount
 
     public SpawnArea(String name, Location pos1, Location pos2) {
         this.name = name;
@@ -54,6 +55,14 @@ public class SpawnArea {
     // Existing getters and setters remain unchanged
     public String getName() {
         return name;
+    }
+
+    public int getXpAmount() {
+        return xpAmount;
+    }
+
+    public void setXpAmount(int xpAmount) {
+        this.xpAmount = Math.max(0, xpAmount);
     }
 
     public void setName(String name) {

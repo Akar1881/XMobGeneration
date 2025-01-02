@@ -37,3 +37,7 @@ messages:
   no-boss-spawn: "&cNo boss spawn point set for this area!"
   boss-configured: "&aBoss area %name% has been configured!"
   usage-configboss: "&cUsage: /xmg configboss <name> <mobType|mythic:mobType> <respawnDelay>"
+  usage-setxp: "&cUsage: /xmg xp <area> <amount>"
+  invalid-xp-amount: "&cXP amount must be 0 or greater!"
+  xp-set: "&aXP amount for area %name% set to %amount%!"
+  xp-earned: "&a+%amount% XP"

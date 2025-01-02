@@ -60,7 +60,7 @@ public class GUIListener implements Listener {
             handleAreaList(player, clicked, title);
         } else if (title.startsWith("§8Edit Area - ")) {
             event.setCancelled(true);
-            handleAreaEdit(player, clicked, title);
+            handleAreaEdit(player, clicked, title, event);
         } else if (title.startsWith("§8Custom Drops - ")) {
             handleCustomDrops(event, title);
         } else if (title.startsWith("§8Mob Equipment - ")) {
@@ -215,7 +215,7 @@ public class GUIListener implements Listener {
         }
     }
 
-    private void handleAreaEdit(Player player, ItemStack clicked, String title) {
+    private void handleAreaEdit(Player player, ItemStack clicked, String title, InventoryClickEvent clickEvent) {
         String areaName = title.substring("§8Edit Area - ".length());
         SpawnArea area = plugin.getAreaManager().getArea(areaName);
         
@@ -230,6 +230,22 @@ public class GUIListener implements Listener {
                 break;
             case CRAFTING_TABLE:
                 plugin.getGUIManager().openMobStatsMenu(player, area);
+                break;
+            case EXPERIENCE_BOTTLE:
+                if (clickEvent.isShiftClick()) {
+                    player.closeInventory();
+                    player.sendMessage("§aType the XP amount in chat. Type 'cancel' to cancel.");
+                    // Handle chat input in a separate listener
+                } else {
+                    int currentXP = area.getXpAmount();
+                    if (clickEvent.isLeftClick()) {
+                        area.setXpAmount(currentXP + 10);
+                    } else if (clickEvent.isRightClick()) {
+                        area.setXpAmount(Math.max(0, currentXP - 10));
+                    }
+                    plugin.getAreaManager().saveAreas();
+                    plugin.getGUIManager().openAreaEditGUI(player, area);
+                }
                 break;
             case LIME_DYE:
             case GRAY_DYE:
