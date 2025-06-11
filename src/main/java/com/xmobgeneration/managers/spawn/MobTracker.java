@@ -9,11 +9,44 @@ import java.util.*;
 public class MobTracker {
     private final Map<UUID, SpawnedMob> trackedMobs = new HashMap<>();
     private final Map<String, Set<SpawnedMob>> areaSpawnedMobs = new HashMap<>();
+    private static final long CLEANUP_INTERVAL = 300000L; // 5 minutes in milliseconds
+    private long lastCleanup = System.currentTimeMillis();
 
     public void trackMob(Entity entity, String areaName, Location spawnLoc) {
         SpawnedMob trackedMob = new SpawnedMob(entity, areaName, spawnLoc);
         trackedMobs.put(entity.getUniqueId(), trackedMob);
         areaSpawnedMobs.computeIfAbsent(areaName, k -> new HashSet<>()).add(trackedMob);
+        
+        // Perform cleanup if needed
+        performCleanupIfNeeded();
+    }
+
+    private void performCleanupIfNeeded() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastCleanup >= CLEANUP_INTERVAL) {
+            cleanupDeadMobs();
+            lastCleanup = currentTime;
+        }
+    }
+
+    private void cleanupDeadMobs() {
+        // Remove dead mobs that have been dead for more than 1 hour
+        long oneHourAgo = System.currentTimeMillis() - 3600000L;
+        
+        trackedMobs.entrySet().removeIf(entry -> {
+            SpawnedMob mob = entry.getValue();
+            if (mob.isDead() && mob.getDeathTime() < oneHourAgo) {
+                Set<SpawnedMob> areaMobs = areaSpawnedMobs.get(mob.getAreaName());
+                if (areaMobs != null) {
+                    areaMobs.remove(mob);
+                    if (areaMobs.isEmpty()) {
+                        areaSpawnedMobs.remove(mob.getAreaName());
+                    }
+                }
+                return true;
+            }
+            return false;
+        });
     }
 
     public void handleMobDeath(Entity entity) {

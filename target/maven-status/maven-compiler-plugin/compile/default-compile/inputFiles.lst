@@ -1,59 +1,61 @@
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\CommandManager.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\SubCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\BossListCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\ConfigAreaCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\ConfigBossCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\CreateAreaCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\DeleteAreaCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\GetWandCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\GuiCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\HelpCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\ListAreasCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\MobConfigCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\ReloadCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\SetMobNamesCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\SetXPCommand.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\config\ConfigManager.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\gui\GUIManager.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\gui\menus\AreaEditMenu.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\gui\menus\CustomDropsMenu.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\gui\menus\CustomMobEquipmentMenu.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\gui\menus\MobStatsMenu.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\gui\menus\MobTypeMenu.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\listeners\AreaSelectionListener.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\listeners\BossDamageListener.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\listeners\BossWandListener.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\listeners\CustomDropsListener.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\listeners\CustomDropsMenuListener.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\listeners\GUIListener.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\listeners\MobContainmentListener.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\listeners\MobDamageListener.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\listeners\MobDeathListener.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\listeners\MobSpawnListener.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\listeners\MobStatsMenuListener.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\AreaManager.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\drops\BossDropDistributor.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\drops\BossDropHandler.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\drops\DropUtil.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\RestartManager.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\BossSpawnHandler.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\LocationFinder.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\MobEquipmentApplier.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\MobStatApplier.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\MobTracker.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\RespawnTask.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\SpawnManager.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\managers\XPManager.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\models\BossDamageTracker.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\models\CustomDrops.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\models\MobEquipment.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\models\MobStats.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\models\SpawnArea.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\models\SpawnedMob.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\mythicmobs\MythicMobsManager.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\utils\CommandHelper.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\utils\GuiUtils.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\utils\InventoryUtils.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\utils\LocationSerializer.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\utils\MessageUtils.java
-C:\Users\dolfen center\OneDrive\Desktop\dhjjh\target\XMobGeneration\src\main\java\com\xmobgeneration\XMobGeneration.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\CommandManager.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\SubCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\BossListCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\ConfigAreaCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\ConfigBossCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\CreateAreaCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\DeleteAreaCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\GetWandCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\GuiCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\HelpCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\LevelRangeCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\ListAreasCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\MobConfigCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\ProximityCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\ReloadCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\SetMobNamesCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\commands\subcommands\SetXPCommand.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\config\ConfigManager.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\gui\GUIManager.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\gui\menus\AreaEditMenu.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\gui\menus\CustomDropsMenu.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\gui\menus\CustomMobEquipmentMenu.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\gui\menus\MobStatsMenu.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\gui\menus\MobTypeMenu.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\listeners\AreaSelectionListener.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\listeners\BossDamageListener.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\listeners\BossWandListener.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\listeners\CustomDropsListener.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\listeners\CustomDropsMenuListener.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\listeners\GUIListener.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\listeners\MobContainmentListener.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\listeners\MobDamageListener.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\listeners\MobDeathListener.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\listeners\MobSpawnListener.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\listeners\MobStatsMenuListener.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\AreaManager.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\drops\BossDropDistributor.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\drops\BossDropHandler.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\drops\DropUtil.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\RestartManager.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\BossSpawnHandler.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\LocationFinder.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\MobEquipmentApplier.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\MobStatApplier.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\MobTracker.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\spawn\RespawnTask.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\SpawnManager.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\managers\XPManager.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\models\BossDamageTracker.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\models\CustomDrops.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\models\MobEquipment.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\models\MobStats.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\models\SpawnArea.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\models\SpawnedMob.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\mythicmobs\MythicMobsManager.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\utils\CommandHelper.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\utils\GuiUtils.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\utils\InventoryUtils.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\utils\LocationSerializer.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\utils\MessageUtils.java
+C:\Users\akarb\OneDrive\Desktop\XMobGeneration\src\main\java\com\xmobgeneration\XMobGeneration.java

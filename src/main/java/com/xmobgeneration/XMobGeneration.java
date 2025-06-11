@@ -10,6 +10,8 @@ import com.xmobgeneration.managers.XPManager;
 import com.xmobgeneration.models.BossDamageTracker;
 import com.xmobgeneration.managers.RestartManager;
 import com.xmobgeneration.mythicmobs.MythicMobsManager;
+import com.xmobgeneration.models.SpawnArea;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class XMobGeneration extends JavaPlugin {
@@ -39,15 +41,7 @@ public class XMobGeneration extends JavaPlugin {
 
         // Register commands and listeners
         getCommand("xmg").setExecutor(new CommandManager(this));
-        getServer().getPluginManager().registerEvents(new GUIListener(this), this);
-        getServer().getPluginManager().registerEvents(new MobDeathListener(this), this);
-        getServer().getPluginManager().registerEvents(new CustomDropsListener(this), this);
-        getServer().getPluginManager().registerEvents(new MobDamageListener(this), this);
-        getServer().getPluginManager().registerEvents(new CustomDropsMenuListener(this), this);
-        getServer().getPluginManager().registerEvents(new MobContainmentListener(this), this);
-        getServer().getPluginManager().registerEvents(new BossWandListener(this), this);
-        getServer().getPluginManager().registerEvents(new BossDamageListener(this), this);
-        getServer().getPluginManager().registerEvents(new MobStatsMenuListener(this), this);
+        registerListeners();
 
         // Initialize spawning after all areas are loaded
         getServer().getScheduler().runTaskLater(this, () -> {
@@ -63,21 +57,51 @@ public class XMobGeneration extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // Cancel all scheduled tasks
         if (restartManager != null) {
             restartManager.stop();
         }
-
-        if (spawnManager != null) {
-            for (String areaName : areaManager.getAllAreas().keySet()) {
-                spawnManager.getMobTracker().despawnAreaMobs(areaName);
+        
+        // Stop all spawn tasks and despawn mobs
+        for (SpawnArea area : areaManager.getAllAreas().values()) {
+            spawnManager.stopSpawning(area.getName());
+            spawnManager.getMobTracker().despawnAreaMobs(area.getName());
+        }
+        
+        // Save all areas
+        areaManager.saveAreas();
+        
+        // Clear all boss tracking
+        for (SpawnArea area : areaManager.getAllAreas().values()) {
+            if (area.isBossArea()) {
+                spawnManager.getBossSpawnHandler().removeBossTracking(area.getName());
             }
         }
-
-        if (areaManager != null) {
-            areaManager.saveAreas();
-        }
+        
+        // Cancel all Bukkit tasks
+        Bukkit.getScheduler().cancelTasks(this);
+        
+        // Clear all managers
+        spawnManager = null;
+        areaManager = null;
+        restartManager = null;
+        configManager = null;
+        guiManager = null;
+        mythicMobsManager = null;
 
         getLogger().info("XMobGeneration has been disabled!");
+    }
+
+    private void registerListeners() {
+        // Register all event listeners
+        getServer().getPluginManager().registerEvents(new MobDamageListener(this), this);
+        getServer().getPluginManager().registerEvents(new MobDeathListener(this), this);
+        getServer().getPluginManager().registerEvents(new MobSpawnListener(this), this);
+        getServer().getPluginManager().registerEvents(new MobContainmentListener(this), this);
+        getServer().getPluginManager().registerEvents(new BossWandListener(this), this);
+        getServer().getPluginManager().registerEvents(new AreaSelectionListener(this), this);
+        getServer().getPluginManager().registerEvents(new GUIListener(this), this);
+        getServer().getPluginManager().registerEvents(new CustomDropsMenuListener(this), this);
     }
 
     public static XMobGeneration getInstance() {

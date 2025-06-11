@@ -36,6 +36,8 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         commands.put("configboss", new ConfigBossCommand(plugin));
         commands.put("bosslist", new BossListCommand(plugin));
         commands.put("xp", new SetXPCommand(plugin));
+        commands.put("levelrange", new LevelRangeCommand(plugin));
+        commands.put("proximity", new ProximityCommand(plugin));
     }
 
     @Override

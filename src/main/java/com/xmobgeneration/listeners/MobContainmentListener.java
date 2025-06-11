@@ -14,6 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class MobContainmentListener implements Listener {
     private final XMobGeneration plugin;
+    private static final long CHECK_INTERVAL = 100L; // Check every 5 seconds (100 ticks)
 
     public MobContainmentListener(XMobGeneration plugin) {
         this.plugin = plugin;
@@ -24,20 +25,26 @@ public class MobContainmentListener implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                plugin.getSpawnManager().getMobTracker().getAllMobs().forEach(spawnedMob -> {
-                    Entity entity = spawnedMob.getEntity();
-                    if (entity != null && !entity.isDead()) {
-                        SpawnArea area = plugin.getAreaManager().getArea(spawnedMob.getAreaName());
-                        if (area != null && !isLocationInArea(entity.getLocation(), area)) {
-                            Location safeLocation = findSafeLocation(entity.getLocation(), area);
-                            if (safeLocation != null) {
-                                entity.teleport(safeLocation);
+                // Only check mobs in active areas
+                for (SpawnArea area : plugin.getAreaManager().getAllAreas().values()) {
+                    if (!area.isEnabled()) continue;
+                    
+                    plugin.getSpawnManager().getMobTracker().getAllMobs().stream()
+                        .filter(spawnedMob -> spawnedMob.getAreaName().equals(area.getName()))
+                        .forEach(spawnedMob -> {
+                            Entity entity = spawnedMob.getEntity();
+                            if (entity != null && !entity.isDead()) {
+                                if (!isLocationInArea(entity.getLocation(), area)) {
+                                    Location safeLocation = findSafeLocation(entity.getLocation(), area);
+                                    if (safeLocation != null) {
+                                        entity.teleport(safeLocation);
+                                    }
+                                }
                             }
-                        }
-                    }
-                });
+                        });
+                }
             }
-        }.runTaskTimer(plugin, 20L, 20L); // Check every second
+        }.runTaskTimer(plugin, CHECK_INTERVAL, CHECK_INTERVAL);
     }
 
     @EventHandler

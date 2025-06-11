@@ -20,6 +20,7 @@ public class BossSpawnHandler {
     private final Map<String, UUID> bossUUIDs = new HashMap<>();
     private final Map<String, Boolean> isRespawning = new HashMap<>();
     private final Lock spawnLock = new ReentrantLock();
+    private final Lock respawnLock = new ReentrantLock();
 
     public BossSpawnHandler(XMobGeneration plugin) {
         this.plugin = plugin;
@@ -48,7 +49,7 @@ public class BossSpawnHandler {
     }
 
     private void scheduleBossRespawn(SpawnArea area) {
-        spawnLock.lock();
+        respawnLock.lock();
         try {
             cancelRespawnTask(area.getName());
             isRespawning.put(area.getName(), true);
@@ -71,7 +72,7 @@ public class BossSpawnHandler {
             respawnTask.runTaskLater(plugin, area.getRespawnDelay() * 20L);
             respawnTasks.put(area.getName(), respawnTask);
         } finally {
-            spawnLock.unlock();
+            respawnLock.unlock();
         }
     }
 
@@ -118,7 +119,7 @@ public class BossSpawnHandler {
     }
 
     public void cancelRespawnTask(String areaName) {
-        spawnLock.lock();
+        respawnLock.lock();
         try {
             BukkitRunnable task = respawnTasks.remove(areaName);
             if (task != null) {
@@ -126,7 +127,7 @@ public class BossSpawnHandler {
             }
             isRespawning.remove(areaName);
         } finally {
-            spawnLock.unlock();
+            respawnLock.unlock();
         }
     }
 

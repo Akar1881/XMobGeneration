@@ -19,6 +19,10 @@ public class SpawnArea {
     private boolean isBossArea;
     private Location bossSpawnPoint;
     private int xpAmount = 10; // Default XP amount
+    private int minLevel = 1; // Default min level
+    private int maxLevel = 1; // Default max level
+    private boolean playerProximityRequired = false; // Whether spawning requires player proximity
+    private int proximityRange = 50; // Default proximity range in blocks
 
     public SpawnArea(String name, Location pos1, Location pos2) {
         this.name = name;
@@ -154,5 +158,53 @@ public class SpawnArea {
     
     public void setBossSpawnPoint(Location bossSpawnPoint) {
         this.bossSpawnPoint = bossSpawnPoint;
+    }
+    
+    public int getMinLevel() {
+        return minLevel;
+    }
+    
+    public void setMinLevel(int minLevel) {
+        // Ensure min level is between 1 and 1000
+        this.minLevel = Math.min(1000, Math.max(1, minLevel));
+        // Ensure max level is not less than min level
+        this.maxLevel = Math.max(this.minLevel, this.maxLevel);
+    }
+    
+    public int getMaxLevel() {
+        return maxLevel;
+    }
+    
+    public void setMaxLevel(int maxLevel) {
+        // Ensure max level is between min level and 1000
+        this.maxLevel = Math.min(1000, Math.max(this.minLevel, maxLevel));
+    }
+    
+    public boolean isPlayerProximityRequired() {
+        return playerProximityRequired;
+    }
+    
+    public void setPlayerProximityRequired(boolean playerProximityRequired) {
+        this.playerProximityRequired = playerProximityRequired;
+    }
+    
+    public int getProximityRange() {
+        return proximityRange;
+    }
+    
+    public void setProximityRange(int proximityRange) {
+        this.proximityRange = Math.max(10, proximityRange);
+    }
+    
+    /**
+     * Gets a random level between minLevel and maxLevel
+     * @return A random level value
+     */
+    public int getRandomLevel() {
+        if (minLevel == maxLevel) {
+            return minLevel;
+        }
+        // Use a safer random calculation to prevent integer overflow
+        return minLevel + (int)(Math.random() * (maxLevel - minLevel + 1));
     }
 }

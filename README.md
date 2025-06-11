@@ -20,6 +20,8 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
   - Custom mob names with level display
   - Configurable health and damage
   - Level system with visual indicators
+  - Min/max level ranges for large areas
+  - Player proximity-based spawning
 - Custom mob equipment system
   - Configure armor and off-hand items
   - Persistent equipment per area
@@ -38,6 +40,7 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
   - Boss drop distribution based on damage contribution
   - Damage leaderboard display
   - Special rewards for top damage dealers
+  - Support for normal mobs in boss areas
 - Automatic area restart system
 - Persistent data storage
 
@@ -57,9 +60,9 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
 
 ## Commands
 
-- `/xmg create <name>` - Create a new spawn area
-- `/xmg delete <name>` - Delete a spawn area
-- `/xmg config <name> <mobType|mythic:mobType> <count> <delay>` - Configure an area
+- `/xmg create <n>` - Create a new spawn area
+- `/xmg delete <n>` - Delete a spawn area
+- `/xmg config <n> <mobType|mythic:mobType> <count> <delay>` - Configure an area
 - `/xmg setmobnames <areaname> <mobname>` - Set custom name for mobs in an area
 - `/xmg mobconfig <areaname> <health> <damage> <level>` - Configure mob stats
 - `/xmg list` - List all spawn areas
@@ -67,9 +70,11 @@ A powerful Minecraft plugin for managing custom mob spawn areas with an intuitiv
 - `/xmg reload` - Reload configuration and restart all mob areas
 - `/xmg help` - Show help message
 - `/xmg getwand` - Get the boss spawn point wand
-- `/xmg configboss <name> <mobType|mythic:mobType> <respawnDelay>` - Configure a boss area
+- `/xmg configboss <n> <mobType|mythic:mobType> <respawnDelay>` - Configure a boss area
 - `/xmg bosslist` - List all boss areas
 - `/xmg xp <area> <amount>` - Set XP reward for an area
+- `/xmg levelrange <area> <minLevel> <maxLevel>` - Set level range for mobs in an area
+- `/xmg proximity <area> <true|false> <range>` - Set player proximity requirement for spawning
 
 ## Permissions
 
@@ -93,7 +98,7 @@ Messages can also be customized in the configuration file.
 ## Usage
 
 1. Use WorldEdit to select an area (using the wooden axe)
-2. Create a spawn area using `/xmg create <name>`
+2. Create a spawn area using `/xmg create <n>`
 3. Configure the area using the GUI or commands
 4. Enable/disable spawning using the GUI
 5. Configure custom drops and mob stats through the GUI

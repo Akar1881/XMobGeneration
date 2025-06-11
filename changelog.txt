@@ -1,5 +1,59 @@
 # XMobGeneration Changelog
 
+## Version 1.9.0 (2025-06-11)
+
+### Added
+- **Level Range System**:
+  - Set minimum and maximum levels for mobs in large areas
+  - Random level assignment between min/max range
+  - Use `/xmg levelrange <area> <minLevel> <maxLevel>` command
+  - Perfect for large 500x500+ areas with varied difficulty
+
+- **Player Proximity Spawning**:
+  - Optional player proximity requirement for mob spawning
+  - Configurable proximity range (minimum 10 blocks)
+  - Use `/xmg proximity <area> <true|false> <range>` command
+  - Prevents unnecessary spawning when no players are nearby
+  - Optimizes performance for large servers (150-200+ players)
+
+- **Enhanced Boss Areas**:
+  - Boss areas now support both boss and normal mob spawning
+  - No need to create nested areas anymore
+  - Normal mobs spawn alongside bosses in boss areas
+  - Better area utilization and management
+
+### Fixed
+- **Critical Bug Fixes**:
+  - Fixed NullPointerException in LocationSerializer when using boss wand
+  - Fixed mob damage not properly affecting players
+  - Fixed health scaling issues with custom mob stats
+  - Improved thread safety for multiple arena handling
+
+- **Performance Improvements**:
+  - Optimized spawning system for large servers
+  - Better memory management for multiple worlds
+  - Reduced lag with proximity-based spawning
+  - Enhanced mob tracking efficiency
+
+- **Boss System Enhancements**:
+  - Fixed boss spawn coordination issues
+  - Improved boss area mob management
+  - Better handling of boss and normal mob coexistence
+  - Enhanced boss respawn reliability
+
+### Technical Improvements
+- Enhanced null safety in location handling
+- Improved error handling for large area management
+- Better validation for level range settings
+- Optimized proximity checking algorithms
+- Enhanced thread-safe operations for high-player-count servers
+
+### Performance Optimizations
+- Reduced CPU usage with proximity-based spawning
+- Optimized for 150-200+ player servers
+- Better memory management across multiple worlds
+- Improved spawn location finding algorithms
+
 ## Version 1.8.0 (2025-01-02)
 
 ### Added
@@ -41,7 +95,6 @@
 - Enhanced coordination between mob clearing and boss respawning
 - Better state management for boss tracking and respawn tasks
 - Improved logging for boss spawn and death events
-
 
 ## Version 1.6.0 (2024-12-30)
 

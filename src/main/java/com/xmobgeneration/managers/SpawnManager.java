@@ -49,21 +49,20 @@ public class SpawnManager {
 
         mobTracker.despawnAreaMobs(area.getName());
         
+        // Spawn boss if it's a boss area
         if (area.isBossArea()) {
             bossSpawnHandler.removeBossTracking(area.getName());
             if (area.isEnabled()) {
                 bossSpawnHandler.spawnBoss(area);
             }
-        } else {
-            performInitialSpawn(area);
         }
+        
+        // Always spawn normal mobs, even in boss areas
+        performInitialSpawn(area);
     }
 
     private void performInitialSpawn(SpawnArea area) {
-        if (area.isBossArea()) {
-            return;
-        }
-
+        // Allow spawning in all areas, including boss areas
         int neededMobs = area.getSpawnCount();
         int attempts = 0;
         int maxAttempts = neededMobs * 3;
@@ -90,7 +89,7 @@ public class SpawnManager {
             entity = plugin.getMythicMobsManager().spawnMythicMob(
                 area.getMythicMobType(), 
                 location,
-                area.getMobStats().getLevel()
+                area.getRandomLevel()
             );
             
             if (entity == null) {
@@ -196,6 +195,10 @@ public class SpawnManager {
 
     public MobTracker getMobTracker() {
         return mobTracker;
+    }
+
+    public BossSpawnHandler getBossSpawnHandler() {
+        return bossSpawnHandler;
     }
 
     public UUID getBossUUID(String areaName) {

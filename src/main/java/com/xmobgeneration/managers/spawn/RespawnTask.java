@@ -31,12 +31,12 @@ public class RespawnTask extends BukkitRunnable {
         for (SpawnArea area : plugin.getAreaManager().getAllAreas().values()) {
             if (!area.isEnabled()) continue;
             
-            // Handle boss respawn separately
+            // Handle boss respawn for boss areas
             if (area.isBossArea()) {
                 handleBossRespawn(area, currentTime);
-                continue;
             }
             
+            // Always handle normal mob respawns, even in boss areas
             List<SpawnedMob> mobsToRespawn = mobTracker.getDeadMobsReadyToRespawn(currentTime, area.getRespawnDelay());
             for (SpawnedMob mob : mobsToRespawn) {
                 respawnMob(mob, area);
@@ -72,7 +72,7 @@ public class RespawnTask extends BukkitRunnable {
             entity = plugin.getMythicMobsManager().spawnMythicMob(
                 area.getMythicMobType(),
                 location,
-                area.getMobStats().getLevel()
+                area.getRandomLevel()
             );
         } else {
             entity = location.getWorld().spawnEntity(location, area.getMobType());
@@ -110,7 +110,7 @@ public class RespawnTask extends BukkitRunnable {
             entity = plugin.getMythicMobsManager().spawnMythicMob(
                 area.getMythicMobType(),
                 spawnLoc,
-                area.getMobStats().getLevel()
+                area.getRandomLevel()
             );
         } else {
             entity = spawnLoc.getWorld().spawnEntity(spawnLoc, area.getMobType());

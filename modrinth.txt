@@ -1,6 +1,6 @@
 XMobGeneration - Advanced Mob Spawn Area Manager
 
-A powerful and user-friendly Minecraft plugin that gives server administrators complete control over mob spawning with customizable areas, drops, and mob configurations. Perfect for creating custom mob arenas, RPG zones, and boss battles.
+A powerful and user-friendly Minecraft plugin that gives server administrators complete control over mob spawning with customizable areas, drops, and mob configurations. Perfect for creating custom mob arenas, RPG zones, and boss battles. Optimized for large servers with 150-200+ players across multiple worlds.
 
 🎮 Key Features:
 • Create and manage up to 45 custom mob spawn areas
@@ -9,9 +9,11 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • Support for both vanilla mobs and MythicMobs
 • Thread-safe boss spawn management
 • Automatic area restart system
+• Performance optimized for large servers
 
 ⚔️ Boss System:
 • Dedicated boss areas with single-boss control
+• Boss areas now support both boss AND normal mob spawning
 • Thread-safe boss spawn management
 • Automatic area clearing on boss death
 • Configurable respawn delays
@@ -37,13 +39,23 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • Visual XP gain notifications
 • Easy XP configuration through GUI
 
-🛠️ Mob Customization:
+🛠️ Advanced Mob Customization:
+• **Level Range System** - Set min/max levels for large areas (NEW in v1.9!)
 • Custom names with level display
 • Configurable health and damage
 • Level system with visual indicators
 • Hologram display showing level, name, and health
 • Per-area mob statistics
 • Customizable equipment loadouts
+• Random level assignment within specified ranges
+
+⚡ Performance & Optimization:
+• **Player Proximity Spawning** - Mobs only spawn when players are nearby (NEW in v1.9!)
+• Configurable proximity range (minimum 10 blocks)
+• Optimized for 150-200+ player servers
+• Efficient spawn management across multiple worlds
+• Reduced lag with smart spawning algorithms
+• Memory optimized for large-scale operations
 
 ⚔️ Equipment System:
 • Configure armor and weapons
@@ -68,25 +80,34 @@ A powerful and user-friendly Minecraft plugin that gives server administrators c
 • WorldEdit integration
 • Comprehensive command system
 • Easy configuration reload
+• Enhanced null safety and error handling
 
-📚 Documentation:
-Full documentation available in the README.md file:
-• Installation guide
-• Command reference
-• Configuration options
-• Usage tutorials
-• MythicMobs integration guide
+📚 New Commands in v1.9:
+• `/xmg levelrange <area> <minLevel> <maxLevel>` - Set level ranges for large areas
+• `/xmg proximity <area> <true|false> <range>` - Configure proximity-based spawning
+• All existing commands remain unchanged
 
 🔧 Requirements:
-• Spigot/Paper 1.17+
+• Spigot/Paper 1.17+ (Tested on Paper 1.21.4)
 • WorldEdit plugin
 • MythicMobs plugin (Optional)
 
 Perfect for:
-• RPG servers
+• Large RPG servers (150-200+ players)
+• Multiple world setups
 • Custom mob arenas
 • Spawn area management
 • Boss battle systems
-• Custom server experiences
+• Performance-critical environments
+
+🚀 Version 1.9 Highlights:
+• Fixed critical NullPointerException bugs
+• Enhanced mob damage system
+• Improved boss area functionality
+• Added level range system for large areas
+• Player proximity spawning for performance
+• Optimized for high-player-count servers
+• Better error handling and stability
 
 Active development and support through GitHub issues tracker.
+Thoroughly tested on Leaf/Paper 1.21.4 with high player counts.

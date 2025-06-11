@@ -103,6 +103,14 @@ public class AreaManager {
             area.setXpAmount(areaSection.getInt("xpAmount", 10)); // Default 10 XP
             area.setRespawnDelay(areaSection.getInt("respawnDelay", 30));
             area.setEnabled(areaSection.getBoolean("enabled", true));
+            
+            // Load level range settings
+            area.setMinLevel(areaSection.getInt("minLevel", 1));
+            area.setMaxLevel(areaSection.getInt("maxLevel", 1));
+            
+            // Load player proximity settings
+            area.setPlayerProximityRequired(areaSection.getBoolean("playerProximityRequired", false));
+            area.setProximityRange(areaSection.getInt("proximityRange", 50));
 
             // Load custom drops
             ConfigurationSection customDropsSection = areaSection.getConfigurationSection("customDrops");
@@ -181,6 +189,14 @@ public class AreaManager {
             areaSection.set("respawnDelay", area.getRespawnDelay());
             areaSection.set("enabled", area.isEnabled());
             areaSection.set("xpAmount", area.getXpAmount());
+            
+            // Save level range settings
+            areaSection.set("minLevel", area.getMinLevel());
+            areaSection.set("maxLevel", area.getMaxLevel());
+            
+            // Save player proximity settings
+            areaSection.set("playerProximityRequired", area.isPlayerProximityRequired());
+            areaSection.set("proximityRange", area.getProximityRange());
 
             areaSection.set("isBossArea", area.isBossArea());
             areaSection.set("bossSpawnPoint", LocationSerializer.serialize(area.getBossSpawnPoint()));

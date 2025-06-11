@@ -26,6 +26,7 @@ com\xmobgeneration\managers\spawn\BossSpawnHandler.class
 com\xmobgeneration\commands\subcommands\SetMobNamesCommand.class
 com\xmobgeneration\managers\spawn\RespawnTask.class
 com\xmobgeneration\managers\drops\BossDropHandler.class
+com\xmobgeneration\commands\subcommands\LevelRangeCommand.class
 com\xmobgeneration\gui\GUIManager.class
 com\xmobgeneration\listeners\GUIListener$1.class
 com\xmobgeneration\listeners\BossWandListener.class
@@ -48,6 +49,7 @@ com\xmobgeneration\XMobGeneration.class
 com\xmobgeneration\managers\SpawnManager.class
 com\xmobgeneration\managers\AreaManager.class
 com\xmobgeneration\listeners\CustomDropsMenuListener.class
+com\xmobgeneration\commands\subcommands\ProximityCommand.class
 com\xmobgeneration\commands\subcommands\MobConfigCommand.class
 com\xmobgeneration\listeners\MobDamageListener.class
 com\xmobgeneration\gui\menus\MobTypeMenu$1.class

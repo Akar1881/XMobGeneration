@@ -8,20 +8,23 @@ public class CommandHelper {
         List<CommandInfo> commands = new ArrayList<>();
         
         // General Commands
-        commands.add(new CommandInfo("create", "<name>", "Create a new spawn area"));
-        commands.add(new CommandInfo("delete", "<name>", "Delete a spawn area"));
+        commands.add(new CommandInfo("create", "<n>", "Create a new spawn area"));
+        commands.add(new CommandInfo("delete", "<n>", "Delete a spawn area"));
         commands.add(new CommandInfo("list", "", "List all spawn areas"));
         commands.add(new CommandInfo("gui", "", "Open the GUI interface"));
         commands.add(new CommandInfo("reload", "", "Reload config and restart all mob areas"));
+        commands.add(new CommandInfo("xp", "<area> <amount>", "Set XP amount for an area"));
         
         // Mob Configuration Commands
-        commands.add(new CommandInfo("config", "<name> <mobType|mythic:mobType> <count> <delay>", "Configure an area"));
+        commands.add(new CommandInfo("config", "<n> <mobType|mythic:mobType> <count> <delay>", "Configure an area"));
         commands.add(new CommandInfo("setmobnames", "<areaname> <mobname>", "Set custom name for mobs in an area"));
         commands.add(new CommandInfo("mobconfig", "<areaname> <health> <damage> <level>", "Configure mob stats"));
+        commands.add(new CommandInfo("levelrange", "<area> <minLevel> <maxLevel>", "Set level range for mobs in an area"));
+        commands.add(new CommandInfo("proximity", "<area> <true|false> <range>", "Set player proximity requirement for spawning"));
         
         // Boss Commands
         commands.add(new CommandInfo("getwand", "", "Get the boss spawn point wand"));
-        commands.add(new CommandInfo("configboss", "<name> <mobType|mythic:mobType> <respawnDelay>", "Configure a boss area"));
+        commands.add(new CommandInfo("configboss", "<n> <mobType|mythic:mobType> <respawnDelay>", "Configure a boss area"));
         commands.add(new CommandInfo("bosslist", "", "List all boss areas"));
         
         return commands;

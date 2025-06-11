@@ -41,3 +41,7 @@ messages:
   invalid-xp-amount: "&cXP amount must be 0 or greater!"
   xp-set: "&aXP amount for area %name% set to %amount%!"
   xp-earned: "&a+%amount% XP"
+  usage-levelrange: "&cUsage: /xmg levelrange <area> <minLevel> <maxLevel>"
+  level-range-set: "&aLevel range for area %name% set to %min%-%max%!"
+  usage-proximity: "&cUsage: /xmg proximity <area> <true|false> <range>"
+  proximity-set: "&aPlayer proximity for area %name% %enabled% with range %range% blocks!"
